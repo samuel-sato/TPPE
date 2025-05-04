@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - quarkus_net
+
+  quarkus:
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile.jvm
+    container_name: quarkus-app
+    depends_on:
+      - mysql
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:mysql://mysql:3306/appdb
+      QUARKUS_DATASOURCE_USERNAME: appuser
+      QUARKUS_DATASOURCE_PASSWORD: apppass
+    ports:
+      - "8080:8080"
+    networks:
+      - quarkus_net
+
+volumes:
+  mysql_data:
+
+networks:
+  quarkus_net:
