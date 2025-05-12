@@ -5,6 +5,8 @@ import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.entity.Seller;
 import unb.tppe.view.dto.SellerDTO;
 
+import java.util.List;
+
 @ApplicationScoped
 public class SellerSerivce {
 
@@ -18,6 +20,7 @@ public class SellerSerivce {
         p.name = dto.getName();
         p.email = dto.getEmail();
         p.birthdate = dto.getBirthdate();
+        p.persist();
 
         Seller seller = new Seller();
         seller.person = p;
@@ -29,4 +32,7 @@ public class SellerSerivce {
         return  seller;
     }
 
+    public List<Seller> listAll(){
+        return Seller.listAll();
+    }
 }
