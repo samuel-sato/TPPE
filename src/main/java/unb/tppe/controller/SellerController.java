@@ -37,8 +37,8 @@ public class SellerController {
     }
 
     @GET()
-    @Path("id")
-    public Response read(@PathParam("id") Integer id){
-        return Response.status(Response.Status.OK).entity(sellerSerivce.listAll()).build();
+    @Path("{id}")
+    public Response read(Long id){
+        return Response.status(Response.Status.OK).entity(sellerSerivce.listById(id)).build();
     }
 }

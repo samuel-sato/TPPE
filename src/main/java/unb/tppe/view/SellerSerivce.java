@@ -35,4 +35,8 @@ public class SellerSerivce {
     public List<Seller> listAll(){
         return Seller.listAll();
     }
+
+    public Seller listById(Long id){
+        return Seller.findById(id);
+    }
 }
