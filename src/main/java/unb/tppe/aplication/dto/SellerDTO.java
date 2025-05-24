@@ -1,6 +1,5 @@
-package unb.tppe.view.dto;
+package unb.tppe.aplication.dto;
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

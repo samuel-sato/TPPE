@@ -8,8 +8,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class Seller extends BaseEntity {
-    private Person person;
-    private double baseSalary;
-    private double numberHours;
+public class Departament extends BaseEntity{
+    private String name;
+    private String description;
 }

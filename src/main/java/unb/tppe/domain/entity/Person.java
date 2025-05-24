@@ -1,14 +1,26 @@
 package unb.tppe.domain.entity;
 
-import jakarta.persistence.*;
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "PERSON")
-public class Person extends PanacheEntity {
-    public String name;
-    public String email;
-    public LocalDate birthdate;
+@Getter
+@Setter
+@SuperBuilder
+public class Person extends BaseEntity {
+    private String name;
+    private String email;
+    private LocalDate birthdate;
+
+//    public Person(){
+//        super(null);
+//    }
+//
+//    public Person(Long id, String name, String email, LocalDate birthdate){
+//        super(id);
+//        this.name = name;
+//        this.email = email;
+//        this.birthdate = birthdate;
+//    }
 }

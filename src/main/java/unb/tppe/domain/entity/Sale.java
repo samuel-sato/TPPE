@@ -5,11 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @SuperBuilder
-public class Seller extends BaseEntity {
-    private Person person;
-    private double baseSalary;
-    private double numberHours;
+public class Sale extends BaseEntity {
+    private LocalDate dateSale;
+    private double price;
 }
