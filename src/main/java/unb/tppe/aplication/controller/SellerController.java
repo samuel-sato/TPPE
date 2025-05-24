@@ -41,6 +41,12 @@ public class SellerController {
         return Response.status(Response.Status.OK).entity(sellerSerivce.findById(id)).build();
     }
 
+    @PUT
+    @Path("{id}")
+    public Response update(Long id, SellerDTO sellerDto){
+        return Response.status(Response.Status.OK).entity(sellerSerivce.update(id, sellerDto)).build();
+    }
+
     @DELETE()
     @Path("{id}")
     public Response delete(Long id){

@@ -8,6 +8,7 @@ import unb.tppe.domain.respository.SellerRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
 import unb.tppe.domain.useCase.DeleteBaseUseCase;
 import unb.tppe.domain.useCase.ReadBaseUseCase;
+import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,14 +19,17 @@ public class SellerSerivce {
     private CreateBaseUseCase<Seller, SellerRepository> createUseCase;
     private ReadBaseUseCase<Seller, SellerRepository> readUseCase;
     private DeleteBaseUseCase<Seller, SellerRepository> deleteBseCase;
+    private UpdateBaseUseCase<Seller, SellerRepository> updateBseCase;
 
 
     public SellerSerivce(CreateBaseUseCase<Seller, SellerRepository> createUseCase,
                          ReadBaseUseCase<Seller, SellerRepository> readUseCase,
-                         DeleteBaseUseCase<Seller, SellerRepository> deleteBseCase){
+                         DeleteBaseUseCase<Seller, SellerRepository> deleteBseCase,
+                         UpdateBaseUseCase<Seller, SellerRepository> updateBseCase){
         this.createUseCase = createUseCase;
         this.readUseCase = readUseCase;
         this.deleteBseCase = deleteBseCase;
+        this.updateBseCase = updateBseCase;
     }
 
     public Seller create(SellerDTO dto){
@@ -50,6 +54,24 @@ public class SellerSerivce {
 
     public Optional<Seller> findById(Long id){
         return readUseCase.findById(id);
+    }
+
+    public Seller update(Long id, SellerDTO dto){
+        Person p = Person.builder()
+                .id(id)
+                .name(dto.getName())
+                .email(dto.getEmail())
+                .birthdate(dto.getBirthdate())
+                .build();
+
+        Seller seller = Seller.builder()
+                .id(id)
+                .person(p)
+                .baseSalary(dto.getBaseSalary())
+                .numberHours(dto.getNumberHours())
+                .build();
+
+        return updateBseCase.execute(id, seller);
     }
 
     public boolean deleteById(Long id){

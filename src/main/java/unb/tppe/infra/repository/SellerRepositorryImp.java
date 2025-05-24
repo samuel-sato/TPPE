@@ -23,6 +23,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
     }
 
 
+    @Transactional
     public Seller create(Seller entity) {
         SellerSchema schema = mapper.toSchema(entity);
         personRepository.persist(schema.getPersonSchema());
@@ -48,8 +49,18 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
     }
 
 
-    public Seller update(Seller entyty) {
-        return null;
+    @Transactional
+    public Seller update(Seller entity) {
+        SellerSchema schema = findById(entity.getId());
+
+        schema.setBaseSalary(entity.getBaseSalary());
+        schema.setNumberHours(entity.getNumberHours());
+        schema.getPersonSchema().setName(entity.getPerson().getName());
+        schema.getPersonSchema().setEmail(entity.getPerson().getEmail());
+        schema.getPersonSchema().setBirthdate(entity.getPerson().getBirthdate());
+
+        persist(schema);
+        return mapper.toDomain(schema);
     }
 
 

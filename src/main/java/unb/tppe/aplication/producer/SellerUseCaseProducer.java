@@ -10,6 +10,7 @@ import unb.tppe.domain.respository.SellerRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
 import unb.tppe.domain.useCase.DeleteBaseUseCase;
 import unb.tppe.domain.useCase.ReadBaseUseCase;
+import unb.tppe.domain.useCase.UpdateBaseUseCase;
 import unb.tppe.infra.schema.SellerSchema;
 
 @ApplicationScoped
@@ -37,6 +38,12 @@ public class SellerUseCaseProducer {
     @Produces
     public DeleteBaseUseCase<Seller, SellerRepository> deleteUseCase(){
         return new DeleteBaseUseCase<Seller, SellerRepository>(sellerRepository);
+    }
+
+    @RequestScoped
+    @Produces
+    public UpdateBaseUseCase<Seller, SellerRepository> updateUseCase(){
+        return new UpdateBaseUseCase<Seller, SellerRepository>(sellerRepository);
     }
 }
 
