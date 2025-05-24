@@ -1,6 +1,5 @@
 package unb.tppe.domain.useCase;
 
-import jakarta.enterprise.context.Dependent;
 import unb.tppe.domain.entity.BaseEntity;
 import unb.tppe.domain.respository.CreateBaseRepository;
 

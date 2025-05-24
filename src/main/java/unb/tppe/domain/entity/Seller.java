@@ -1,6 +1,5 @@
 package unb.tppe.domain.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
