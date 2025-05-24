@@ -4,9 +4,11 @@ package unb.tppe.aplication.producer;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.Produces;
+import org.hibernate.sql.Delete;
 import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SellerRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
+import unb.tppe.domain.useCase.DeleteBaseUseCase;
 import unb.tppe.domain.useCase.ReadBaseUseCase;
 import unb.tppe.infra.schema.SellerSchema;
 
@@ -29,6 +31,12 @@ public class SellerUseCaseProducer {
     @Produces
     public ReadBaseUseCase<Seller, SellerRepository> readUseCase(){
         return new ReadBaseUseCase<Seller, SellerRepository>(sellerRepository);
+    }
+
+    @RequestScoped
+    @Produces
+    public DeleteBaseUseCase<Seller, SellerRepository> deleteUseCase(){
+        return new DeleteBaseUseCase<Seller, SellerRepository>(sellerRepository);
     }
 }
 

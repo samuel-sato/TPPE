@@ -6,6 +6,7 @@ import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SellerRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
+import unb.tppe.domain.useCase.DeleteBaseUseCase;
 import unb.tppe.domain.useCase.ReadBaseUseCase;
 
 import java.util.List;
@@ -16,12 +17,15 @@ public class SellerSerivce {
 
     private CreateBaseUseCase<Seller, SellerRepository> createUseCase;
     private ReadBaseUseCase<Seller, SellerRepository> readUseCase;
+    private DeleteBaseUseCase<Seller, SellerRepository> deleteBseCase;
 
 
     public SellerSerivce(CreateBaseUseCase<Seller, SellerRepository> createUseCase,
-                         ReadBaseUseCase<Seller, SellerRepository> readUseCase){
+                         ReadBaseUseCase<Seller, SellerRepository> readUseCase,
+                         DeleteBaseUseCase<Seller, SellerRepository> deleteBseCase){
         this.createUseCase = createUseCase;
         this.readUseCase = readUseCase;
+        this.deleteBseCase = deleteBseCase;
     }
 
     public Seller create(SellerDTO dto){
@@ -46,5 +50,9 @@ public class SellerSerivce {
 
     public Optional<Seller> findById(Long id){
         return readUseCase.findById(id);
+    }
+
+    public boolean deleteById(Long id){
+        return deleteBseCase.execute(id);
     }
 }

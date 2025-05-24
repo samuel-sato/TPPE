@@ -40,4 +40,10 @@ public class SellerController {
     public Response read(Long id){
         return Response.status(Response.Status.OK).entity(sellerSerivce.findById(id)).build();
     }
+
+    @DELETE()
+    @Path("{id}")
+    public Response delete(Long id){
+        return Response.status(Response.Status.OK).entity(sellerSerivce.deleteById(id)).build();
+    }
 }

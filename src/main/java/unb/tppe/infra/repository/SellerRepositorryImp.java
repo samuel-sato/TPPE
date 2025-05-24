@@ -2,6 +2,7 @@ package unb.tppe.infra.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SellerRepository;
 import unb.tppe.infra.mapping.SellerMapper;
@@ -52,7 +53,8 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
     }
 
 
-    public void delete(Seller entity) {
-
+    @Transactional
+    public boolean deleteEntity(long id) {
+        return deleteById(id);
     }
 }
