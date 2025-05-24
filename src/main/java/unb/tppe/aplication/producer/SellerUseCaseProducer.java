@@ -7,6 +7,7 @@ import jakarta.ws.rs.Produces;
 import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SellerRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
+import unb.tppe.domain.useCase.ReadBaseUseCase;
 import unb.tppe.infra.schema.SellerSchema;
 
 @ApplicationScoped
@@ -20,8 +21,14 @@ public class SellerUseCaseProducer {
 
     @RequestScoped
     @Produces
-    public CreateBaseUseCase<Seller, SellerSchema, SellerRepository> createSellerUseCase(){
-        return new CreateBaseUseCase<Seller, SellerSchema, SellerRepository>(sellerRepository);
+    public CreateBaseUseCase<Seller, SellerRepository> createUseCase(){
+        return new CreateBaseUseCase<Seller, SellerRepository>(sellerRepository);
+    }
+
+    @RequestScoped
+    @Produces
+    public ReadBaseUseCase<Seller, SellerRepository> readUseCase(){
+        return new ReadBaseUseCase<Seller, SellerRepository>(sellerRepository);
     }
 }
 

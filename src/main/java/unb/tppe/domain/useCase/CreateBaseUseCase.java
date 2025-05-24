@@ -4,7 +4,7 @@ import unb.tppe.domain.entity.BaseEntity;
 import unb.tppe.domain.respository.CreateBaseRepository;
 
 
-public class CreateBaseUseCase<E extends BaseEntity, S, R extends CreateBaseRepository<E>> {
+public class CreateBaseUseCase<E extends BaseEntity, R extends CreateBaseRepository<E>> {
 
     private R repository;
 
