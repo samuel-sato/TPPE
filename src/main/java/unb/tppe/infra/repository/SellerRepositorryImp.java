@@ -17,7 +17,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
     private SellerMapper mapper;
     private PersonRepositoryImp personRepository;
 
-    public SellerRepositorryImp(PersonRepositoryImp personRepository ,SellerMapper mapper){
+    public SellerRepositorryImp(PersonRepositoryImp personRepository, SellerMapper mapper){
         this.personRepository = personRepository;
         this.mapper = mapper;
     }

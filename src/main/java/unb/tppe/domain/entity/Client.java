@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @SuperBuilder
-public class Person extends BaseEntity {
-    private String name;
-    private String email;
-    private LocalDate birthdate;
+public class Client extends BaseEntity {
+    private Person person;
+    private LocalDate registrationDate;
+    private boolean notifyPromotion;
 }
