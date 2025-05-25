@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import unb.tppe.domain.entity.Product;
 import unb.tppe.domain.respository.ProductRepository;
 import unb.tppe.infra.mapping.ProductMapper;
+import unb.tppe.infra.schema.DepartmentSchema;
 import unb.tppe.infra.schema.ProductSchema;
 
 import java.util.List;
@@ -15,15 +16,24 @@ import java.util.Optional;
 public class ProductRepositorryImp implements ProductRepository, PanacheRepository<ProductSchema> {
 
     private ProductMapper mapper;
+    private DepartmentRepositoryImp departmentRepository;
 
-    public ProductRepositorryImp(ProductMapper mapper){
+    public ProductRepositorryImp(DepartmentRepositoryImp departmentRepository, ProductMapper mapper){
+        this.departmentRepository = departmentRepository;
         this.mapper = mapper;
     }
 
 
     @Transactional
     public Product create(Product entity) {
+
+        Optional<DepartmentSchema> departmentSchema = departmentRepository.listSchemaById(entity.getIdDepartment());
+
+        if (!departmentSchema.isPresent())
+            throw new RuntimeException("Departamento não encontrado");
+
         ProductSchema schema = mapper.toSchema(entity);
+        schema.setDepartment(departmentSchema.get());
         persist(schema);
         return mapper.toDomain(schema);
     }

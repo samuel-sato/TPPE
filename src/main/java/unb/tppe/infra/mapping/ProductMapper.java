@@ -19,6 +19,7 @@ public class ProductMapper implements Mapping<Product, ProductSchema> {
                 .name(schema.getName())
                 .price(schema.getPrice())
                 .description(schema.getDescription())
+                .idDepartment(schema.getDepartment().getId())
                 .build();
     }
 

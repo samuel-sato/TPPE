@@ -23,11 +23,16 @@ public class ProductController {
     @Transactional
     public Response create(ProductDTO dto) {
 
-        Product seller = service.create(dto);
-        if (seller.getId() != 0)
-            return Response.status(Response.Status.CREATED).entity(seller).build();
-        else
-            return Response.status(Response.Status.BAD_REQUEST).build();
+        try{
+            Product seller = service.create(dto);
+            if (seller.getId() != 0)
+                return Response.status(Response.Status.CREATED).entity(seller).build();
+            else
+                return Response.status(Response.Status.BAD_REQUEST).entity("Erro ao gravar entidade").build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e).build();
+        }
+
     }
 
     @GET

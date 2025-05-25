@@ -37,6 +37,7 @@ public class ProductSerivce {
                 .name(dto.getName())
                 .description(dto.getDescription())
                 .price(dto.getPrice())
+                .idDepartment(dto.getIdDepartment())
                 .build();
 
         return createUseCase.execute(product);
