@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApplicationScoped
-public class DepartamentCreateDTO {
+public class DepartmentCreateDTO {
     private String name;
     private String description;
 }

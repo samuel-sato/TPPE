@@ -6,12 +6,10 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import unb.tppe.aplication.dto.DepartamentCreateDTO;
+import unb.tppe.aplication.dto.DepartmentCreateDTO;
 import unb.tppe.aplication.dto.ProductDTO;
 import unb.tppe.aplication.service.DepartmentSerivce;
-import unb.tppe.aplication.service.ProductSerivce;
 import unb.tppe.domain.entity.Department;
-import unb.tppe.domain.entity.Product;
 
 @Path("/departments")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -24,7 +22,7 @@ public class DepartmentController {
     @POST
     @RequestScoped
     @Transactional
-    public Response create(DepartamentCreateDTO dto) {
+    public Response create(DepartmentCreateDTO dto) {
 
         Department department = service.create(dto);
         if (department.getId() != 0)

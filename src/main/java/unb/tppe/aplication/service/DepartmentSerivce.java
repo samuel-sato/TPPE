@@ -1,12 +1,10 @@
 package unb.tppe.aplication.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import unb.tppe.aplication.dto.DepartamentCreateDTO;
+import unb.tppe.aplication.dto.DepartmentCreateDTO;
 import unb.tppe.aplication.dto.ProductDTO;
 import unb.tppe.domain.entity.Department;
-import unb.tppe.domain.entity.Product;
 import unb.tppe.domain.respository.DepartmentRepository;
-import unb.tppe.domain.respository.ProductRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
 import unb.tppe.domain.useCase.DeleteBaseUseCase;
 import unb.tppe.domain.useCase.ReadBaseUseCase;
@@ -20,21 +18,21 @@ public class DepartmentSerivce {
 
     private CreateBaseUseCase<Department, DepartmentRepository> createUseCase;
     private ReadBaseUseCase<Department, DepartmentRepository> readUseCase;
-    private DeleteBaseUseCase<Department, DepartmentRepository> deleteBseCase;
-    private UpdateBaseUseCase<Department, DepartmentRepository> updateBseCase;
+    private DeleteBaseUseCase<Department, DepartmentRepository> deleteUseCase;
+    private UpdateBaseUseCase<Department, DepartmentRepository> updateUseCase;
 
 
     public DepartmentSerivce(CreateBaseUseCase<Department, DepartmentRepository> createUseCase,
                              ReadBaseUseCase<Department, DepartmentRepository> readUseCase,
-                             DeleteBaseUseCase<Department, DepartmentRepository> deleteBseCase,
-                             UpdateBaseUseCase<Department, DepartmentRepository> updateBseCase){
+                             DeleteBaseUseCase<Department, DepartmentRepository> deleteUseCase,
+                             UpdateBaseUseCase<Department, DepartmentRepository> updateUseCase){
         this.createUseCase = createUseCase;
         this.readUseCase = readUseCase;
-        this.deleteBseCase = deleteBseCase;
-        this.updateBseCase = updateBseCase;
+        this.deleteUseCase = deleteUseCase;
+        this.updateUseCase = updateUseCase;
     }
 
-    public Department create(DepartamentCreateDTO dto){
+    public Department create(DepartmentCreateDTO dto){
 
         Department product = Department.builder()
                 .name(dto.getName())
@@ -60,10 +58,10 @@ public class DepartmentSerivce {
                 .description(dto.getDescription())
                 .build();
 
-        return updateBseCase.execute(id, product);
+        return updateUseCase.execute(id, product);
     }
 
     public boolean deleteById(Long id){
-        return deleteBseCase.execute(id);
+        return deleteUseCase.execute(id);
     }
 }

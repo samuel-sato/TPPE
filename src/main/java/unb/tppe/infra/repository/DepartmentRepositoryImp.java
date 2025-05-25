@@ -2,6 +2,7 @@ package unb.tppe.infra.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 import unb.tppe.domain.entity.Department;
 import unb.tppe.domain.respository.DepartmentRepository;
 import unb.tppe.infra.mapping.DepartmentMapper;
@@ -19,10 +20,26 @@ public class DepartmentRepositoryImp implements DepartmentRepository, PanacheRep
         this.mapper = mapper;
     }
 
+    @Transactional
     public Department create(Department entity) {
         DepartmentSchema schema = mapper.toSchema(entity);
         persist(schema);
         return mapper.toDomain(schema);
+    }
+
+    public Optional<Department> listById(Long id) {
+        Optional<DepartmentSchema> departmentSchema = findByIdOptional(id);
+
+        if(departmentSchema.isPresent())
+            return Optional.of(mapper.toDomain(departmentSchema.get()));
+
+        return Optional.empty();
+    }
+
+    public List<Department> listAllEntity() {
+        List<DepartmentSchema> schemas = listAll();
+        List<Department> departments = schemas.stream().map(mapper::toDomain).toList();
+        return departments;
     }
 
     public boolean removeProductById(Long id) {
@@ -42,11 +59,5 @@ public class DepartmentRepositoryImp implements DepartmentRepository, PanacheRep
     }
 
 
-    public Optional<Department> listById(Long id) {
-        return Optional.empty();
-    }
 
-    public List<Department> listAllEntity() {
-        return List.of();
-    }
 }
