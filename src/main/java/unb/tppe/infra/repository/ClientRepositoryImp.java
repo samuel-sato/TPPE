@@ -39,6 +39,10 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
         return Optional.empty();
     }
 
+    public Optional<ClientSchema> listSchemaById(Long id) {
+        return findByIdOptional(id);
+    }
+
 
     public List<Client> listAllEntity() {
         List<ClientSchema> schemas = listAll();

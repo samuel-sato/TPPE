@@ -51,6 +51,10 @@ public class ProductRepositorryImp implements ProductRepository, PanacheReposito
         return ProductSchemas.stream().map(mapper::toDomain).toList();
     }
 
+    public List<ProductSchema> listByIdList(List<Long> ids){
+        return list("id in ?1", ids);
+    }
+
 
     @Transactional
     public Product update(Product entity) {
