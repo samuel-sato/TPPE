@@ -1,34 +1,153 @@
-//package unb.tppe.api;
-//
-//
-//import io.quarkus.test.junit.QuarkusTest;
-//import io.restassured.http.ContentType;
-//import org.junit.jupiter.api.Test;
-//
-//import java.time.LocalDate;
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//import static io.restassured.RestAssured.given;
-//
-//@QuarkusTest
-//public class SellerTest {
-//
-//    @Test( )
-//    void createSeller(){
-//        Map<String, Object> dto = new HashMap<>();
-//        dto.put("name", "João");
-//        dto.put("email", "joao@email.com");
-//        dto.put("birthdate", LocalDate.of(1990, 5, 20).toString());
-//        dto.put("baseSalary", 5000.0);
-//        dto.put("numberHours", 160.0);
-//
-//        given()
-//                .contentType(ContentType.JSON)
-//                .body(dto)
-//                .when()
-//                .post("/sellers")
-//                .then()
-//                .statusCode(201);
-//    }
-//}
+package unb.tppe.api;
+
+
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import unb.tppe.aplication.dto.SellerDTO;
+
+import java.time.LocalDate;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
+
+@QuarkusTest
+public class SellerTest {
+
+    @Test( )
+    void listAll(){
+        given()
+                .when()
+                .get("/sellers")
+                .then()
+                .statusCode(200)
+                .body("", not(empty()));
+
+    }
+
+    @ParameterizedTest()
+    @ValueSource(longs = {1L, 2L, 3L})
+    void listById(Long id){
+
+        given()
+                .when()
+                .get("/sellers" + "/" + id)
+                .then()
+                .statusCode(200)
+                .body("id", equalTo(id.intValue()));
+    }
+
+
+    // Variável para armazenar o ID do vendedor criado para usar em outros testes
+    // Atenção: Isso cria dependência entre testes. Para testes totalmente independentes,
+    // cada teste de update/delete deveria criar seu próprio recurso.
+    private static Long createdSellerId;
+
+    // Seu SellerDTO (certifique-se de que está acessível)
+    // Para este exemplo, vou instanciar diretamente.
+    // Se o seu SellerDTO for @ApplicationScoped, você não precisa injetá-lo aqui para REST Assured,
+    // apenas crie uma instância normal para o corpo da requisição.
+
+    @Test
+    @Order(1) // Garante que a inserção seja executada primeiro
+    void testCreateSeller() {
+        SellerDTO newSeller = new SellerDTO();
+        newSeller.setName("João Silva Teste");
+        newSeller.setEmail("joao.teste@example.com");
+        newSeller.setBirthdate(LocalDate.of(1985, 5, 15));
+        newSeller.setBaseSalary(5000.00);
+        newSeller.setNumberHours(40.0);
+
+        // Realiza a requisição POST para criar o vendedor
+        // e extrai o ID do vendedor criado a partir da resposta
+        createdSellerId = given()
+                .contentType(ContentType.JSON)
+                .body(newSeller)
+                .when()
+                .post("/sellers")
+                .then()
+                .statusCode(201) // HTTP 201 Created
+                .body("name", equalTo(newSeller.getName()))
+                .body("email", equalTo(newSeller.getEmail()))
+                .body("birthdate", equalTo(newSeller.getBirthdate().toString())) // LocalDate é serializado como String
+                .body("baseSalary", equalTo((float) newSeller.getBaseSalary())) // JSON pode tratar como float
+                .body("numberHours", equalTo((float) newSeller.getNumberHours()))
+                .body("id", notNullValue()) // Verifica se um ID foi gerado
+                .extract().path("id"); // Extrai o ID para usar nos próximos testes
+
+        System.out.println("Vendedor criado com ID: " + createdSellerId);
+    }
+
+    @Test
+    @Order(2) // Executa após a criação
+    void testUpdateSeller() {
+        if (createdSellerId == null) {
+            // Se o teste de criação falhou ou não foi executado, este teste não pode prosseguir
+            // Em um cenário real, você poderia pular este teste ou criaria um vendedor aqui.
+            // Para este exemplo, vamos lançar uma exceção ou pular.
+            System.err.println("ID do vendedor não disponível, pulando teste de atualização.");
+            return;
+            // Alternativamente, você pode criar um vendedor aqui:
+            // testCreateSeller(); // Não é ideal chamar um teste de dentro de outro
+        }
+
+        SellerDTO updatedSeller = new SellerDTO();
+        updatedSeller.setName("João Silva Atualizado");
+        updatedSeller.setEmail("joao.atualizado@example.com");
+        updatedSeller.setBirthdate(LocalDate.of(1986, 6, 20));
+        updatedSeller.setBaseSalary(5500.00);
+        updatedSeller.setNumberHours(42.0);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(updatedSeller)
+                .pathParam("id", createdSellerId)
+                .when()
+                .put("/sellers/{id}")
+                .then()
+                .statusCode(200) // HTTP 200 OK (ou 204 No Content dependendo da sua API)
+                .body("name", equalTo(updatedSeller.getName()))
+                .body("email", equalTo(updatedSeller.getEmail()))
+                .body("birthdate", equalTo(updatedSeller.getBirthdate().toString()))
+                .body("baseSalary", equalTo((float) updatedSeller.getBaseSalary()))
+                .body("numberHours", equalTo((float) updatedSeller.getNumberHours()))
+                .body("id", equalTo(createdSellerId.intValue())); // Verifica se o ID permanece o mesmo
+
+        // Opcional: Verificar com um GET se a atualização foi persistida
+        given()
+                .pathParam("id", createdSellerId)
+                .when()
+                .get("/sellers/{id}")
+                .then()
+                .statusCode(200)
+                .body("name", equalTo("João Silva Atualizado"));
+    }
+
+    @Test
+    @Order(3) // Executa após a atualização (e criação)
+    void testDeleteSeller() {
+        if (createdSellerId == null) {
+            System.err.println("ID do vendedor não disponível, pulando teste de deleção.");
+            return;
+        }
+
+        given()
+                .pathParam("id", createdSellerId)
+                .when()
+                .delete("/sellers/{id}")
+                .then()
+                .statusCode(204); // HTTP 204 No Content é comum para DELETE bem-sucedido
+
+        // Opcional: Verificar com um GET se o recurso foi realmente deletado (deve retornar 404)
+        given()
+                .pathParam("id", createdSellerId)
+                .when()
+                .get("/sellers/{id}")
+                .then()
+                .statusCode(404); // HTTP 404 Not Found
+    }
+
+}
