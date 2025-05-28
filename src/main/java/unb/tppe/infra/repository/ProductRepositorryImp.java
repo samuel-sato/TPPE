@@ -59,10 +59,15 @@ public class ProductRepositorryImp implements ProductRepository, PanacheReposito
     @Transactional
     public Product update(Product entity) {
         ProductSchema schema = findById(entity.getId());
+        Optional<DepartmentSchema> departmentSchema = departmentRepository.listSchemaById(entity.getIdDepartment());
+
+        if(departmentSchema.isEmpty())
+            throw new RuntimeException("Departamento não encontrado.");
 
         schema.setName(entity.getName());
         schema.setDescription(entity.getDescription());
         schema.setPrice(entity.getPrice());
+        schema.setDepartment(departmentSchema.get());
         persist(schema);
         return mapper.toDomain(schema);
     }

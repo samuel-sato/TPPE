@@ -51,6 +51,6 @@ public class DepartmentController {
     @DELETE()
     @Path("{id}")
     public Response delete(Long id){
-        return Response.status(Response.Status.OK).entity(service.deleteById(id)).build();
+        return Response.status(Response.Status.NO_CONTENT).entity(service.deleteById(id)).build();
     }
 }

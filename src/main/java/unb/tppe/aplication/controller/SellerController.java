@@ -50,6 +50,6 @@ public class SellerController {
     @DELETE()
     @Path("{id}")
     public Response delete(Long id){
-        return Response.status(Response.Status.OK).entity(sellerSerivce.deleteById(id)).build();
+        return Response.status(Response.Status.NO_CONTENT).entity(sellerSerivce.deleteById(id)).build();
     }
 }
