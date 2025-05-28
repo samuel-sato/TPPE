@@ -4,7 +4,6 @@ package unb.tppe.aplication.producer;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.Produces;
-import unb.tppe.domain.entity.Product;
 import unb.tppe.domain.entity.Sale;
 import unb.tppe.domain.respository.SaleRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;

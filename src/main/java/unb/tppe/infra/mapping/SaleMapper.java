@@ -1,13 +1,10 @@
 package unb.tppe.infra.mapping;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.entity.Sale;
-import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.mapping.Mapping;
 import unb.tppe.infra.schema.ProductSchema;
 import unb.tppe.infra.schema.SaleSchema;
-import unb.tppe.infra.schema.SellerSchema;
 
 @ApplicationScoped
 public class SaleMapper implements Mapping<Sale, SaleSchema> {

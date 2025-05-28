@@ -7,12 +7,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import unb.tppe.aplication.dto.SaleDTO;
-import unb.tppe.aplication.dto.SellerDTO;
 import unb.tppe.aplication.service.SaleSerivce;
-import unb.tppe.aplication.service.SellerSerivce;
-import unb.tppe.domain.entity.Product;
 import unb.tppe.domain.entity.Sale;
-import unb.tppe.domain.entity.Seller;
 
 @Path("/sales")
 @Consumes(MediaType.APPLICATION_JSON)

@@ -2,8 +2,6 @@ package unb.tppe.aplication.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import unb.tppe.aplication.dto.SaleDTO;
-import unb.tppe.aplication.dto.SellerDTO;
-import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.entity.Sale;
 import unb.tppe.domain.respository.SaleRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;

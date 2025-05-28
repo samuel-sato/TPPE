@@ -4,10 +4,12 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import unb.tppe.domain.entity.Sale;
-import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SaleRepository;
 import unb.tppe.infra.mapping.SaleMapper;
-import unb.tppe.infra.schema.*;
+import unb.tppe.infra.schema.ClientSchema;
+import unb.tppe.infra.schema.ProductSchema;
+import unb.tppe.infra.schema.SaleSchema;
+import unb.tppe.infra.schema.SellerSchema;
 
 import java.time.LocalDate;
 import java.util.List;
