@@ -7,7 +7,9 @@ import unb.tppe.domain.entity.Client;
 import unb.tppe.domain.respository.ClientRepository;
 import unb.tppe.infra.mapping.ClientMapper;
 import unb.tppe.infra.schema.ClientSchema;
+import unb.tppe.infra.schema.SellerSchema;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,7 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
     @Transactional
     public Client create(Client entity) {
         ClientSchema schema = mapper.toSchema(entity);
+        schema.getPersonSchema().setExclusionDate(LocalDate.of(0001,01,01));
         personRepository.persist(schema.getPersonSchema());
         persist(schema);
         return mapper.toDomain(schema);
@@ -33,8 +36,11 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
     public Optional<Client> listById(Long id) {
         Optional<ClientSchema> schemaOptional = findByIdOptional(id);
 
-        if (schemaOptional.isPresent())
-            return Optional.of(mapper.toDomain(schemaOptional.get()));
+        if (schemaOptional.isPresent()){
+            if(schemaOptional.get().getPersonSchema().getExclusionDate() == null)
+                return Optional.of(mapper.toDomain(schemaOptional.get()));
+        }
+
 
         return Optional.empty();
     }
@@ -65,6 +71,14 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
 
     @Transactional
     public boolean deleteEntity(long id) {
-        return deleteById(id);
+        //return deleteById(id);
+        Optional<ClientSchema> clientSchema = findByIdOptional(id);
+
+        if (clientSchema.isPresent()){
+            clientSchema.get().getPersonSchema().setExclusionDate(LocalDate.now());
+            persist(clientSchema.get());
+            return true;
+        }
+        return false;
     }
 }

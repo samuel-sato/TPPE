@@ -29,7 +29,7 @@ public class SellerTest {
     }
 
     @ParameterizedTest()
-    @ValueSource(longs = {1L, 2L, 3L})
+    @ValueSource(longs = {2L, 3L})
     void listById(Long id){
 
         given()

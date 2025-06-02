@@ -8,7 +8,9 @@ import unb.tppe.domain.respository.ProductRepository;
 import unb.tppe.infra.mapping.ProductMapper;
 import unb.tppe.infra.schema.DepartmentSchema;
 import unb.tppe.infra.schema.ProductSchema;
+import unb.tppe.infra.schema.SellerSchema;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +44,12 @@ public class ProductRepositorryImp implements ProductRepository, PanacheReposito
     public Optional<Product> listById(Long id) {
         Optional<ProductSchema> schemaOptional = findByIdOptional(id);
 
-        return schemaOptional.map(productSchema -> mapper.toDomain(productSchema));
+        if(schemaOptional.isPresent()){
+            if (schemaOptional.get().getExclusionDate() == null)
+                return schemaOptional.map(productSchema -> mapper.toDomain(productSchema));
+        }
+
+        return Optional.empty();
     }
 
 
@@ -75,6 +82,14 @@ public class ProductRepositorryImp implements ProductRepository, PanacheReposito
 
     @Transactional
     public boolean deleteEntity(long id) {
-        return deleteById(id);
+
+        Optional<ProductSchema> schema = findByIdOptional(id);
+
+        if (schema.isPresent()){
+            schema.get().setExclusionDate(LocalDate.now());
+            persist(schema.get());
+            return true;
+        }
+        return false;
     }
 }

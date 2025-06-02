@@ -19,4 +19,5 @@ public class PersonSchema {
     private String name;
     private String email;
     private LocalDate birthdate;
+    private LocalDate exclusionDate;
 }

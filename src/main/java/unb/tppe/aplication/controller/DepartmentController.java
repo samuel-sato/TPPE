@@ -39,7 +39,11 @@ public class DepartmentController {
     @GET()
     @Path("{id}")
     public Response read(Long id){
-        return Response.status(Response.Status.OK).entity(service.findById(id)).build();
+        try{
+            return Response.status(Response.Status.OK).entity(service.findById(id)).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
     }
 
     @PUT

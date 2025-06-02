@@ -3,6 +3,7 @@ package unb.tppe.infra.schema;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,4 +25,5 @@ public class DepartmentSchema {
 
     private String name;
     private String description;
+    private LocalDate exclusionDate;
 }

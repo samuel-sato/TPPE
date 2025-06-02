@@ -23,7 +23,11 @@ public class ReadBaseUseCase<E extends BaseEntity, R extends ListBaseRepository<
         return repository.listAllEntity();
     }
 
-    public Optional<E> findById(Long id){
-        return repository.listById(id);
+    public E findById(Long id){
+        Optional<E> entity = repository.listById(id);
+        if(entity.isPresent())
+            return entity.get();
+
+        throw new RuntimeException("Não encontrado");
     }
 }

@@ -46,7 +46,7 @@ public class DepartmentSerivce {
         return readUseCase.listAll();
     }
 
-    public Optional<Department> findById(Long id){
+    public Department findById(Long id){
         return readUseCase.findById(id);
     }
 

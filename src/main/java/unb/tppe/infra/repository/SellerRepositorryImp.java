@@ -8,6 +8,7 @@ import unb.tppe.domain.respository.SellerRepository;
 import unb.tppe.infra.mapping.SellerMapper;
 import unb.tppe.infra.schema.SellerSchema;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
     @Transactional
     public Seller create(Seller entity) {
         SellerSchema schema = mapper.toSchema(entity);
+        schema.getPersonSchema().setExclusionDate(LocalDate.of(0001,01,01));
         personRepository.persist(schema.getPersonSchema());
         persist(schema);
         return mapper.toDomain(schema);
@@ -35,8 +37,11 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
     public Optional<Seller> listById(Long id) {
         Optional<SellerSchema> sellerSchema = findByIdOptional(id);
 
-        if (sellerSchema.isPresent())
+        if (sellerSchema.isPresent()){
+            if(sellerSchema.get().getPersonSchema().getExclusionDate() == null)
             return Optional.of(mapper.toDomain(sellerSchema.get()));
+        }
+
 
         return Optional.empty();
     }
@@ -66,6 +71,14 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
 
     @Transactional
     public boolean deleteEntity(long id) {
-        return deleteById(id);
+        Optional<SellerSchema> sellerSchema = findByIdOptional(id);
+
+        if (sellerSchema.isPresent()){
+            sellerSchema.get().getPersonSchema().setExclusionDate(LocalDate.now());
+            persist(sellerSchema.get());
+            return true;
+        }
+        return false;
+
     }
 }

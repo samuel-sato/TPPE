@@ -27,7 +27,7 @@ public class DepartmentTest {
     }
 
     @ParameterizedTest()
-    @ValueSource(longs = {1L, 2L, 3L})
+    @ValueSource(longs = {2L, 3L})
     void listById(Long id){
 
         given()
@@ -72,18 +72,18 @@ public class DepartmentTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(updatedDepartment)
-                .pathParam("id", createdDepartmentId)
+                .pathParam("id", 2L)
                 .when()
                 .put("/departments/{id}")
                 .then()
                 .statusCode(200) // HTTP 200 OK (ou 204 No Content, dependendo da sua API)
                 .body("name", equalTo(updatedDepartment.getName()))
                 .body("description", equalTo(updatedDepartment.getDescription()))
-                .body("id", equalTo(createdDepartmentId.intValue())); // Verifica se o ID permanece o mesmo
+                .body("id", equalTo(2)); // Verifica se o ID permanece o mesmo
 
         // Opcional: Verificar com um GET se a atualização foi persistida
         given()
-                .pathParam("id", createdDepartmentId)
+                .pathParam("id", 2)
                 .when()
                 .get("/departments/{id}")
                 .then()

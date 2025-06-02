@@ -45,7 +45,7 @@ public class SaleSerivce {
         return readUseCase.listAll();
     }
 
-    public Optional<Sale> findById(Long id){
+    public Sale findById(Long id){
         return readUseCase.findById(id);
     }
 

@@ -47,7 +47,7 @@ public class ProductSerivce {
         return readUseCase.listAll();
     }
 
-    public Optional<Product> findById(Long id){
+    public Product findById(Long id){
         return readUseCase.findById(id);
     }
 

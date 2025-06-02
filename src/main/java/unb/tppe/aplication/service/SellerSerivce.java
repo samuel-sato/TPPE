@@ -52,7 +52,7 @@ public class SellerSerivce {
         return readUseCase.listAll();
     }
 
-    public Optional<Seller> findById(Long id){
+    public Seller findById(Long id){
         return readUseCase.findById(id);
     }
 

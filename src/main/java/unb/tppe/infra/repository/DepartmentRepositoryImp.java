@@ -7,7 +7,9 @@ import unb.tppe.domain.entity.Department;
 import unb.tppe.domain.respository.DepartmentRepository;
 import unb.tppe.infra.mapping.DepartmentMapper;
 import unb.tppe.infra.schema.DepartmentSchema;
+import unb.tppe.infra.schema.ProductSchema;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +32,10 @@ public class DepartmentRepositoryImp implements DepartmentRepository, PanacheRep
     public Optional<Department> listById(Long id) {
         Optional<DepartmentSchema> departmentSchema = findByIdOptional(id);
 
-        if(departmentSchema.isPresent())
-            return Optional.of(mapper.toDomain(departmentSchema.get()));
-
+        if(departmentSchema.isPresent()) {
+            if (departmentSchema.get().getExclusionDate() == null)
+                return Optional.of(mapper.toDomain(departmentSchema.get()));
+        }
         return Optional.empty();
     }
 
@@ -58,6 +61,13 @@ public class DepartmentRepositoryImp implements DepartmentRepository, PanacheRep
 
     @Transactional
     public boolean deleteEntity(long id) {
-        return deleteById(id);
+        Optional<DepartmentSchema> schema = findByIdOptional(id);
+
+        if (schema.isPresent()){
+            schema.get().setExclusionDate(LocalDate.now());
+            persist(schema.get());
+            return true;
+        }
+        return false;
     }
 }

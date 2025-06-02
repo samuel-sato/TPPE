@@ -53,7 +53,7 @@ public class ClientService {
         return readUseCase.listAll();
     }
 
-    public Optional<Client> findById(Long id){
+    public Client findById(Long id){
         return readUseCase.findById(id);
     }
 

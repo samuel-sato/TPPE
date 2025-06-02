@@ -3,6 +3,7 @@ package unb.tppe.infra.schema;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,4 +29,5 @@ public class ProductSchema {
     private String name;
     private double price;
     private String description;
+    private LocalDate exclusionDate;
 }
