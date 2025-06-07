@@ -1,0 +1,19 @@
+.centered-icons {
+  /*
+   * O flex: 1 1 auto aqui faz com que este div ocupe o espaço
+   * entre o conteúdo da esquerda e o example-spacer, permitindo o auto-margin.
+   * Remova se não tiver conteúdo à esquerda ou se quiser um comportamento diferente.
+   */
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: space-evenly; /* Centraliza os itens horizontalmente dentro deste div */
+  align-items: center; /* Centraliza os itens verticalmente (se o div tiver altura suficiente) */
+
+  /*
+   * Adiciona margens automáticas para empurrar este container
+   * para o centro do espaço disponível na toolbar.
+   * Combine com 'flex: 1 1 auto;' nos 'example-spacer' para o melhor efeito.
+   */
+  margin-left: auto;
+  margin-right: auto;
+}

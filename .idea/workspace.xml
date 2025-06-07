@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="997e0ff5-32f8-4505-a908-8ec7a8ff7f14" name="Changes" comment="refacto: Correção dos testes devido e ajuste delete lógico">
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/create.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/app.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/docker/Dockerfile.jvm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/docker/Dockerfile.legacy-jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/docker/Dockerfile.native" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/docker/Dockerfile.native-micro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/controller/ClientController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/controller/DepartmentController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/controller/ProductController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/controller/SaleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/controller/SellerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/dto/ClientDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/dto/DepartmentCreateDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/dto/ProductDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/dto/SaleDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/dto/SellerDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/producer/ClientUseCaseProducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/producer/DepartmenUseCaseProducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/producer/ProductUseCaseProducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/producer/SaleUseCaseProducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/producer/SellerUseCaseProducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/service/ClientService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/service/DepartmentSerivce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/service/ProductSerivce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/service/SaleSerivce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/aplication/service/SellerSerivce.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/entity/BaseEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/entity/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/entity/Department.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/entity/Person.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/entity/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/entity/Sale.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/entity/Seller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/mapping/Mapping.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/respository/BaseRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/respository/ClientRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/respository/CreateBaseRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/respository/DepartmentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/respository/ListBaseRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/respository/ProductRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/respository/SaleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/respository/SellerRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/useCase/CreateBaseUseCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/useCase/DeleteBaseUseCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/useCase/ReadBaseUseCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/domain/useCase/UpdateBaseUseCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/mapping/ClientMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/mapping/DepartmentMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/mapping/PersonMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/mapping/ProductMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/mapping/SaleMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/mapping/SellerMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/repository/ClientRepositoryImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/repository/DepartmentRepositoryImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/repository/PersonRepositoryImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/repository/ProductRepositorryImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/repository/SaleRepositoryImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/repository/SellerRepositorryImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/schema/ClientSchema.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/schema/DepartmentSchema.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/schema/PersonSchema.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/schema/ProductSchema.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/schema/SaleSchema.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/unb/tppe/infra/schema/SellerSchema.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/unb/tppe/ExampleResourceIT.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/unb/tppe/ExampleResourceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/unb/tppe/api/ClientTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/unb/tppe/api/DepartmentTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/unb/tppe/api/ProductTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/unb/tppe/api/SaleTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/unb/tppe/api/SellerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/import.sql" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0-sources.jar!/com/mysql/cj/jdbc/exceptions/SQLExceptionsMapping.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/quarkus/quarkus-narayana-jta/3.21.3/quarkus-narayana-jta-3.21.3-sources.jar!/io/quarkus/narayana/jta/runtime/interceptor/TransactionalInterceptorBase.java" root0="SKIP_INSPECTION" />
+    <setting file="jar:///usr/lib/jvm/jdk-21-oracle-x64/lib/src.zip!/java.base/java/time/LocalDate.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2vpWbxmJppEZvhHhSCrTreXhcua" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.ClientTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientTest.listAllClients.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientTest.testCreateClient.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientTest.testDeleteClient.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DepartmentTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DepartmentTest.testDeleteDepartment.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.ProductTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductTest.listAll.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductTest.testUpdateProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SaleTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SaleTest.testUpdateSale.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.SellerTest.createSeller.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SellerTest.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.SellerTest.listAllSeller.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SellerTest.testCreateSeller.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SellerTest.testUpdateSeller.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.java in estudo-java-refactor.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.estudo-java-refactor [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.estudo-java-refactor [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.estudo-java-refactor [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Quarkus Dev Mode.estudo-java.executor&quot;: &quot;Run&quot;,
+    &quot;Remote JVM Debug.estudo-java (Remote).executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/samuel/UNB/TPPE/refactor/backend&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="unb.tppe.api" />
+      <recent name="unb.tppe.aplication.controller" />
+      <recent name="unb.tppe.aplication.dto" />
+      <recent name="unb.tppe.aplication.service" />
+      <recent name="unb.tppe.aplication.producer" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.java in estudo-java-refactor">
+    <configuration name="DepartmentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="estudo-java-refactor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="unb.tppe.api.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="unb.tppe.api" />
+      <option name="MAIN_CLASS_NAME" value="unb.tppe.api.DepartmentTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DepartmentTest.testDeleteDepartment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="estudo-java-refactor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="unb.tppe.api.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="unb.tppe.api" />
+      <option name="MAIN_CLASS_NAME" value="unb.tppe.api.DepartmentTest" />
+      <option name="METHOD_NAME" value="testDeleteDepartment" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SaleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="estudo-java-refactor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="unb.tppe.api.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="unb.tppe.api" />
+      <option name="MAIN_CLASS_NAME" value="unb.tppe.api.SaleTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SaleTest.testUpdateSale" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="estudo-java-refactor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="unb.tppe.api.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="unb.tppe.api" />
+      <option name="MAIN_CLASS_NAME" value="unb.tppe.api.SaleTest" />
+      <option name="METHOD_NAME" value="testUpdateSale" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java in estudo-java-refactor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="estudo-java-refactor" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="estudo-java" type="QuarkusRunConfiguration" factoryName="QuarkusRunConfiguration">
+      <module name="estudo-java-refactor" />
+      <option name="profile" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.java in estudo-java-refactor" />
+        <item itemvalue="JUnit.SaleTest.testUpdateSale" />
+        <item itemvalue="JUnit.SaleTest" />
+        <item itemvalue="JUnit.DepartmentTest" />
+        <item itemvalue="JUnit.DepartmentTest.testDeleteDepartment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="997e0ff5-32f8-4505-a908-8ec7a8ff7f14" name="Changes" comment="" />
+      <created>1744842581500</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744842581500</updated>
+    </task>
+    <task id="LOCAL-00001" summary="feat: adição diagrama UML">
+      <option name="closed" value="true" />
+      <created>1746368271780</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1746368271780</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: criação docker-compose.yml e adição de backlog do produto">
+      <option name="closed" value="true" />
+      <created>1746382096452</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746382096452</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refactor: ajuste nome da base de dados">
+      <option name="closed" value="true" />
+      <created>1746383210311</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746383210311</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: Criação entity Person e Seller">
+      <option name="closed" value="true" />
+      <created>1746978454417</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1746978454417</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: Endpoint para criar Seller">
+      <option name="closed" value="true" />
+      <created>1747088254937</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747088254938</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: Endpoint para listar Sellers">
+      <option name="closed" value="true" />
+      <created>1747088798022</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1747088798022</updated>
+    </task>
+    <task id="LOCAL-00007" summary="refactor: Create Seller">
+      <option name="closed" value="true" />
+      <created>1748057029583</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748057029583</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactor: remoção de import e classe não usados">
+      <option name="closed" value="true" />
+      <created>1748057295172</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1748057295172</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: formas de buscar Seller">
+      <option name="closed" value="true" />
+      <created>1748059020853</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1748059020853</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: deleteSeller">
+      <option name="closed" value="true" />
+      <created>1748060524571</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1748060524571</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: update seller">
+      <option name="closed" value="true" />
+      <created>1748062868934</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1748062868934</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: CRUD Product">
+      <option name="closed" value="true" />
+      <created>1748065461810</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1748065461810</updated>
+    </task>
+    <task id="LOCAL-00013" summary="refactor: exclusão de import não usados">
+      <option name="closed" value="true" />
+      <created>1748065554282</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1748065554282</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: crud Client">
+      <option name="closed" value="true" />
+      <created>1748145533639</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1748145533639</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: create Department">
+      <option name="closed" value="true" />
+      <created>1748179520770</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1748179520770</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: list Departments">
+      <option name="closed" value="true" />
+      <created>1748180196478</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1748180196478</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: updade e delete Departments">
+      <option name="closed" value="true" />
+      <created>1748180768729</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1748180768729</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: correção ao cadastrar produto a um departamento">
+      <option name="closed" value="true" />
+      <created>1748183148174</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1748183148174</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: CRUD sale.">
+      <option name="closed" value="true" />
+      <created>1748227791167</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1748227791167</updated>
+    </task>
+    <task id="LOCAL-00020" summary="refactor: Remoção de import e arquivo não usado">
+      <option name="closed" value="true" />
+      <created>1748397035920</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1748397035920</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: Testes de API para todos os endpoints">
+      <option name="closed" value="true" />
+      <created>1748401371333</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1748401371333</updated>
+    </task>
+    <task id="LOCAL-00022" summary="refacto: Correção status code delete controllers">
+      <option name="closed" value="true" />
+      <created>1748472784666</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1748472784666</updated>
+    </task>
+    <task id="LOCAL-00023" summary="refacto: Correção dos testes devido ao ID não contínuo">
+      <option name="closed" value="true" />
+      <created>1748472853148</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1748472853148</updated>
+    </task>
+    <task id="LOCAL-00024" summary="refacto: Correção dos testes devido e ajuste delete lógico">
+      <option name="closed" value="true" />
+      <created>1748835545357</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1748835545357</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: adição diagrama UML" />
+    <MESSAGE value="feat: criação docker-compose.yml e adição de backlog do produto" />
+    <MESSAGE value="refactor: ajuste nome da base de dados" />
+    <MESSAGE value="feat: Criação entity Person e Seller" />
+    <MESSAGE value="feat: Endpoint para criar Seller" />
+    <MESSAGE value="feat: Endpoint para listar Sellers" />
+    <MESSAGE value="refactor: Create Seller" />
+    <MESSAGE value="refactor: remoção de import e classe não usados" />
+    <MESSAGE value="feat: formas de buscar Seller" />
+    <MESSAGE value="feat: deleteSeller" />
+    <MESSAGE value="feat: update seller" />
+    <MESSAGE value="feat: CRUD Product" />
+    <MESSAGE value="refactor: exclusão de import não usados" />
+    <MESSAGE value="feat: crud Client" />
+    <MESSAGE value="feat: create Department" />
+    <MESSAGE value="feat: list Departments" />
+    <MESSAGE value="feat: updade e delete Departments" />
+    <MESSAGE value="fix: correção ao cadastrar produto a um departamento" />
+    <MESSAGE value="feat: CRUD sale." />
+    <MESSAGE value="refactor: Remoção de import e arquivo não usado" />
+    <MESSAGE value="feat: Testes de API para todos os endpoints" />
+    <MESSAGE value="refacto: Correção status code delete controllers" />
+    <MESSAGE value="refacto: Correção dos testes devido ao ID não contínuo" />
+    <MESSAGE value="refacto: Correção dos testes devido e ajuste delete lógico" />
+    <option name="LAST_COMMIT_MESSAGE" value="refacto: Correção dos testes devido e ajuste delete lógico" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/unb/tppe/aplication/service/SellerSerivce.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/unb/tppe/api/ClientTest.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/unb/tppe/infra/repository/ClientRepositoryImp.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/unb/tppe/api/SellerTest.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/unb/tppe/aplication/controller/SellerController.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/unb/tppe/infra/repository/ClientRepositoryImp.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/unb/tppe/api/ClientTest.java</url>
+          <line>121</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/unb/tppe/aplication/controller/DepartmentController.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/unb/tppe/aplication/controller/DepartmentController.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/unb/tppe/infra/repository/SaleRepositoryImp.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/unb/tppe/infra/mapping/SaleMapper.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/refactor$java_in_estudo_java_refactor.ic" NAME="java in estudo-java-refactor Coverage Results" MODIFIED="1748400602301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>
