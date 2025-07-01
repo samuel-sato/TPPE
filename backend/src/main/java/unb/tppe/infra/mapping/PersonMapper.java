@@ -14,7 +14,10 @@ public class PersonMapper implements Mapping<Person, PersonSchema> {
         .id(schema.getId())
                 .name(schema.getName())
                 .email(schema.getEmail())
-                .birthdate(schema.getBirthdate()).build();
+                .birthdate(schema.getBirthdate())
+                .password(schema.getPassword())
+                .role(schema.getRole())
+                .build();
 
         return p;
     }
@@ -25,6 +28,8 @@ public class PersonMapper implements Mapping<Person, PersonSchema> {
                 .email(entity.getEmail())
                 .name(entity.getName())
                 .birthdate(entity.getBirthdate())
+                .password(entity.getPassword())
+                .role(entity.getRole())
                 .build();
     }
 }

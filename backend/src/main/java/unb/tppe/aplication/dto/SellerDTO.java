@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class SellerDTO {
     private String name;
     private String email;
+    private String password;
     private LocalDate birthdate;
     public double baseSalary;
     public double numberHours;

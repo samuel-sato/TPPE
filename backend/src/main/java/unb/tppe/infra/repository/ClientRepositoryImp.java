@@ -3,6 +3,7 @@ package unb.tppe.infra.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import unb.tppe.domain.UserRoleEnum;
 import unb.tppe.domain.entity.Client;
 import unb.tppe.domain.respository.ClientRepository;
 import unb.tppe.infra.mapping.ClientMapper;
@@ -28,6 +29,7 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
     public Client create(Client entity) {
         ClientSchema schema = mapper.toSchema(entity);
         schema.getPersonSchema().setExclusionDate(LocalDate.of(0001,01,01));
+        schema.getPersonSchema().setRole(UserRoleEnum.CLIENT.value);
         personRepository.persist(schema.getPersonSchema());
         persist(schema);
         return mapper.toDomain(schema);

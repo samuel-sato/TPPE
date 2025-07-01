@@ -3,6 +3,7 @@ package unb.tppe.infra.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import unb.tppe.domain.UserRoleEnum;
 import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SellerRepository;
 import unb.tppe.infra.mapping.SellerMapper;
@@ -28,6 +29,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
     public Seller create(Seller entity) {
         SellerSchema schema = mapper.toSchema(entity);
         schema.getPersonSchema().setExclusionDate(LocalDate.of(0001,01,01));
+        schema.getPersonSchema().setRole(UserRoleEnum.SELLER.value);
         personRepository.persist(schema.getPersonSchema());
         persist(schema);
         return mapper.toDomain(schema);

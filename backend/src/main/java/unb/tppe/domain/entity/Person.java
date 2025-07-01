@@ -12,5 +12,7 @@ import java.time.LocalDate;
 public class Person extends BaseEntity {
     private String name;
     private String email;
+    private String password;
     private LocalDate birthdate;
+    private Integer role;
 }

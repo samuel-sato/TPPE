@@ -18,10 +18,10 @@ services:
       - quarkus_net
 
   quarkus:
-#    build:
-#      context: .
-#      dockerfile: src/main/docker/Dockerfile.jvm
-    build: .
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile.jvm
+#    build: .
     container_name: quarkus-app
     depends_on:
       - mysql
@@ -36,7 +36,7 @@ services:
     volumes:
       - .:/app
       - ~/.m2:/root/.m2
-    command: ./mvnw quarkus:dev -Dquarkus.http.host=0.0.0.0
+#    command: ./mvnw quarkus:dev -Dquarkus.http.host=0.0.0.0
 
 volumes:
   mysql_data:

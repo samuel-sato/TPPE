@@ -36,6 +36,7 @@ public class SellerSerivce {
         Person p = Person.builder()
             .name(dto.getName())
             .email(dto.getEmail())
+            .password(dto.getPassword())
             .birthdate(dto.getBirthdate())
             .build();
 

@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class ClientDTO {
     private String name;
     private String email;
+    private String password;
     private LocalDate birthdate;
     private Boolean notifyPromotion;
 }

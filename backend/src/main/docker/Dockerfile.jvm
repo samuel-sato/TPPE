@@ -78,10 +78,19 @@
 #   accessed directly. (example: "foo.example.com,bar.example.com")
 #
 ###
+
+# Testes e build
+FROM registry.access.redhat.com/ubi9/openjdk-21:1.21 AS build
+
+WORKDIR /project
+COPY . .
+
+RUN ./mvnw verify && ./mvnw package -DskipTests
+
+# Execução da aplicação
 FROM registry.access.redhat.com/ubi9/openjdk-21:1.21
 
 ENV LANGUAGE='en_US:en'
-
 
 # We make four distinct layers so if there are application changes the library layers can be re-used
 COPY --chown=185 target/quarkus-app/lib/ /deployments/lib/

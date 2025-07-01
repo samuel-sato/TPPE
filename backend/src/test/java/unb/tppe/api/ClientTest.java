@@ -33,7 +33,7 @@ public class ClientTest {
     }
 
     @ParameterizedTest()
-    @ValueSource(longs = {1L, 2L, 3L})
+    @ValueSource(longs = {1L, 2L, 3L, 9L})
     void listByIdClient(Long id){
 
         given()

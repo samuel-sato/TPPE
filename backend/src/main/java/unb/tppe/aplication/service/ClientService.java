@@ -37,16 +37,17 @@ public class ClientService {
         Person p = Person.builder()
             .name(dto.getName())
             .email(dto.getEmail())
+            .password(dto.getPassword())
             .birthdate(dto.getBirthdate())
             .build();
 
-        Client seller = Client.builder()
+        Client client = Client.builder()
             .person(p)
             .notifyPromotion(dto.getNotifyPromotion())
             .registrationDate(LocalDate.now())
             .build();
 
-        return createUseCase.execute(seller);
+        return createUseCase.execute(client);
     }
 
     public List<Client> listAll(){

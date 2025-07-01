@@ -28,4 +28,6 @@ public class PersonSchema {
     private String email;
     private LocalDate birthdate;
     private LocalDate exclusionDate;
+    private String password;
+    private Integer role;
 }
