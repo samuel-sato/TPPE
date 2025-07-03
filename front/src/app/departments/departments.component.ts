@@ -5,6 +5,8 @@ import { DepartmentList } from '../entity/DepartmentList';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-departments',
@@ -12,7 +14,9 @@ import { MatCardModule } from '@angular/material/card';
     MatTableModule, 
     CommonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule,
+    RouterLink
   ],
   templateUrl: './departments.component.html',
   styleUrl: './departments.component.css'
@@ -28,14 +32,9 @@ export class DepartmentsComponent implements OnInit{
   ngOnInit(): void {
     this.service.getAll().subscribe({
       next: (data: DepartmentList[])=>{
-        console.log(data)
         this.departments = data
       }
     })
-  }
-
-  editDepartment(id: any){
-    console.log(id);
   }
 
   deleteDepartment(id: any){

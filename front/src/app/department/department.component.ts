@@ -96,9 +96,11 @@ export class DepartmentComponent implements OnInit {
           this.crudService.create(department).subscribe({
             next: (response) => {
               console.log('Departamento cadastrado com sucesso:', response);
+              // Exibir mensagem de sucesso ou redirecionar
             },
             error: (error) => {
               console.error('Erro ao cadastrar departamento:', error);
+              // Exibir mensagem de erro ou redirecionar
             }
           });
         }

@@ -1,39 +1,12 @@
-<!-- <div style="display: flex; justify-content: center; align-items: center; min-height: 40vh;">
-  <div style="width: 80%;">
-    <button matFab extended>Novo</button>
-    <table mat-table [dataSource]="departments" class="mat-elevation-z8">
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Nome </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Descrição </th>
-            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Ações </th> <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="editDepartment(element.id)">
-                  <mat-icon>edit</mat-icon>
-                </button>
-
-                <button mat-icon-button color="warn" (click)="deleteDepartment(element.id)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-            </td>
-        </ng-container>
-        
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
+<mat-card class="department-card">
+  <h2>Departamentos</h2>
+  <div class="header" style="display: flex; justify-content: flex-end; padding-bottom: 1%;">
+    <button mat-raised-button color="primary" class="class-button" [routerLink]="['/department']">
+      Novo
+    </button>
   </div>
   
-</div> -->
-<mat-card class="department-card">
   <table mat-table [dataSource]="departments" class="mat-elevation-z8">
-
     <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nome </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -45,14 +18,16 @@
         </ng-container>
 
         <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Ações </th> <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="editDepartment(element.id)">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+             <td mat-cell *matCellDef="let element">
+              <div style="display: flex; justify-content: space-around;">
+                <a mat-icon-button [routerLink]="['/department/', element.id]">
                   <mat-icon>edit</mat-icon>
-                </button>
-
-                <button mat-icon-button color="warn" (click)="deleteDepartment(element.id)">
+                </a>
+                <button mat-icon-button (click)="deleteDepartment(element.id)">
                   <mat-icon>delete</mat-icon>
                 </button>
+              </div>
             </td>
         </ng-container>
         
