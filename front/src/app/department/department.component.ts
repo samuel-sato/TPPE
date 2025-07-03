@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DepartmentService } from '../service/department.service';
 import { ActivatedRoute } from '@angular/router';
-import { Department } from '../entity/Departament';
+import { Department } from '../entity/Department';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
