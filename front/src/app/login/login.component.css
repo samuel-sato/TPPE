@@ -1,0 +1,19 @@
+.login-card {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.green-button {
+  background-color: #4caf50; /* Material Green 500 */
+  color: white;
+}
+
+.green-button:hover {
+  background-color: #43a047; /* Material Green 600 */
+}

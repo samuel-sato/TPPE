@@ -1,0 +1,28 @@
+<mat-card class="login-card">
+  <h2>Login</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Senha</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar senha'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div style="display: flex; justify-content: space-around;">
+        <button mat-raised-button color="primary" (ngClick)="cadastrarCliente()" class="class-button">
+            Cadastro
+        </button>
+
+        <button mat-raised-button class="green-button" type="submit" [disabled]="loginForm.invalid">
+            Entrar
+        </button>
+    </div>
+  </form>
+</mat-card>
