@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import unb.tppe.aplication.dto.DepartmentCreateDTO;
 import unb.tppe.aplication.dto.ProductDTO;
 import unb.tppe.domain.entity.Department;
+import unb.tppe.domain.entity.Product;
 import unb.tppe.domain.respository.DepartmentRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
 import unb.tppe.domain.useCase.DeleteBaseUseCase;
@@ -12,6 +13,7 @@ import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class DepartmentSerivce {
@@ -37,6 +39,11 @@ public class DepartmentSerivce {
         Department product = Department.builder()
                 .name(dto.getName())
                 .description(dto.getDescription())
+                .products(
+                        dto.getProducts()
+                        .stream()
+                        .map(id -> Product.builder().id(id).build())
+                        .collect(Collectors.toUnmodifiableList()))
                 .build();
 
         return createUseCase.execute(product);
