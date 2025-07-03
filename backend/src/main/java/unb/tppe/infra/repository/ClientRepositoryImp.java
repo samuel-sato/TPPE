@@ -39,7 +39,7 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
         Optional<ClientSchema> schemaOptional = findByIdOptional(id);
 
         if (schemaOptional.isPresent()){
-            if(schemaOptional.get().getPersonSchema().getExclusionDate() == null)
+            if(schemaOptional.get().getPersonSchema().getExclusionDate().equals(LocalDate.of(0001,01,01)))
                 return Optional.of(mapper.toDomain(schemaOptional.get()));
         }
 

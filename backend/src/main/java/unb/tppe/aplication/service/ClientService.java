@@ -13,6 +13,7 @@ import unb.tppe.domain.useCase.UpdateBaseUseCase;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ClientService {
@@ -50,12 +51,12 @@ public class ClientService {
         return createUseCase.execute(client);
     }
 
-    public List<Client> listAll(){
-        return readUseCase.listAll();
+    public List<ClientDTO> listAll(){
+        return mapper(readUseCase.listAll());
     }
 
-    public Client findById(Long id){
-        return readUseCase.findById(id);
+    public ClientDTO findById(Long id){
+        return mapper(readUseCase.findById(id));
     }
 
     public Client update(Long id, ClientDTO dto){
@@ -77,5 +78,22 @@ public class ClientService {
 
     public boolean deleteById(Long id){
         return deleteBseCase.execute(id);
+    }
+
+    private ClientDTO mapper(Client client){
+        return ClientDTO.builder()
+                .id(client.getId())
+                .name(client.getPerson().getName())
+                .email(client.getPerson().getEmail())
+                .birthdate(client.getPerson().getBirthdate())
+                .password(client.getPerson().getPassword())
+                .notifyPromotion(client.isNotifyPromotion())
+                .build();
+    }
+
+    private List<ClientDTO> mapper(List<Client> clients){
+        return clients.stream()
+                .map(this::mapper)
+                .collect(Collectors.toList());
     }
 }

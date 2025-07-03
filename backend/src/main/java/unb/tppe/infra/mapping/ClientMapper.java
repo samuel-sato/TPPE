@@ -21,6 +21,7 @@ public class ClientMapper implements Mapping<Client, ClientSchema> {
                 .email(schema.getPersonSchema().getEmail())
                 .birthdate(schema.getPersonSchema().getBirthdate())
                 .name(schema.getPersonSchema().getName())
+                .password(schema.getPersonSchema().getPassword())
                 .build();
 
         return Client.builder()

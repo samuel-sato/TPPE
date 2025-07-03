@@ -2,8 +2,6 @@ package unb.tppe.aplication.service;
 
 import io.smallrye.jwt.build.Jwt;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import org.eclipse.microprofile.jwt.JsonWebToken;
 import unb.tppe.aplication.dto.UserLoginDTO;
 import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.useCase.LoginUseCase;
