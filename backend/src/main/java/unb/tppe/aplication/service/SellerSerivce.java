@@ -1,7 +1,9 @@
 package unb.tppe.aplication.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import unb.tppe.aplication.dto.ClientDTO;
 import unb.tppe.aplication.dto.SellerDTO;
+import unb.tppe.domain.entity.Client;
 import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SellerRepository;
@@ -12,6 +14,7 @@ import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class SellerSerivce {
@@ -32,7 +35,7 @@ public class SellerSerivce {
         this.updateBseCase = updateBseCase;
     }
 
-    public Seller create(SellerDTO dto){
+    public SellerDTO create(SellerDTO dto){
         Person p = Person.builder()
             .name(dto.getName())
             .email(dto.getEmail())
@@ -46,18 +49,18 @@ public class SellerSerivce {
             .numberHours(dto.getNumberHours())
             .build();
 
-        return createUseCase.execute(seller);
+        return mapper(createUseCase.execute(seller));
     }
 
-    public List<Seller> listAll(){
-        return readUseCase.listAll();
+    public List<SellerDTO> listAll(){
+        return mapper(readUseCase.listAll());
     }
 
-    public Seller findById(Long id){
-        return readUseCase.findById(id);
+    public SellerDTO findById(Long id){
+        return mapper(readUseCase.findById(id));
     }
 
-    public Seller update(Long id, SellerDTO dto){
+    public SellerDTO update(Long id, SellerDTO dto){
         Person p = Person.builder()
                 .id(id)
                 .name(dto.getName())
@@ -72,10 +75,28 @@ public class SellerSerivce {
                 .numberHours(dto.getNumberHours())
                 .build();
 
-        return updateBseCase.execute(id, seller);
+        return mapper(updateBseCase.execute(id, seller));
     }
 
     public boolean deleteById(Long id){
         return deleteBseCase.execute(id);
+    }
+
+    private SellerDTO mapper(Seller seller){
+        return SellerDTO.builder()
+                .id(seller.getId())
+                .name(seller.getPerson().getName())
+                .email(seller.getPerson().getEmail())
+                .password(seller.getPerson().getPassword())
+                .birthdate(seller.getPerson().getBirthdate())
+                .baseSalary(seller.getBaseSalary())
+                .numberHours(seller.getNumberHours())
+                .build();
+    }
+
+    private List<SellerDTO> mapper(List<Seller> sellers){
+        return sellers.stream()
+                .map(this::mapper)
+                .collect(Collectors.toList());
     }
 }

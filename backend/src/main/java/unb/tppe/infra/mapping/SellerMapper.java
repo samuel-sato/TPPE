@@ -21,6 +21,7 @@ public class SellerMapper implements Mapping<Seller, SellerSchema> {
                 .email(schema.getPersonSchema().getEmail())
                 .birthdate(schema.getPersonSchema().getBirthdate())
                 .name(schema.getPersonSchema().getName())
+                .password(schema.getPersonSchema().getPassword())
                 .build();
 
         return Seller.builder()

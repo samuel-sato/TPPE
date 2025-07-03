@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import unb.tppe.aplication.dto.DepartmentCreateDTO;
+import unb.tppe.aplication.dto.DepartmentDTO;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -46,7 +46,7 @@ public class DepartmentTest {
     @Test
     @Order(1) // Garante que a inserção seja executada primeiro
     void testCreateDepartment() {
-        DepartmentCreateDTO newDepartment = new DepartmentCreateDTO();
+        DepartmentDTO newDepartment = new DepartmentDTO();
         newDepartment.setName("Tecnologia");
         newDepartment.setDescription("Departamento de desenvolvimento de software e infraestrutura.");
 
@@ -65,7 +65,7 @@ public class DepartmentTest {
 
         // Usaremos o mesmo DTO para atualização, mas com dados diferentes.
         // Se sua API usar um DTO diferente para atualização, ajuste aqui.
-        DepartmentCreateDTO updatedDepartment = new DepartmentCreateDTO();
+        DepartmentDTO updatedDepartment = new DepartmentDTO();
         updatedDepartment.setName("Tecnologia e Inovação");
         updatedDepartment.setDescription("Departamento focado em desenvolvimento de software, infraestrutura e novas tecnologias.");
 

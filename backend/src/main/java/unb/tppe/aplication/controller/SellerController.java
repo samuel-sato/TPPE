@@ -29,7 +29,7 @@ public class SellerController {
     @Transactional
     public Response create(SellerDTO sellerDto) {
 
-        Seller seller = sellerSerivce.create(sellerDto);
+        SellerDTO seller = sellerSerivce.create(sellerDto);
         if (seller.getId() != 0)
             return Response.status(Response.Status.CREATED).entity(seller).build();
         else
@@ -47,7 +47,7 @@ public class SellerController {
         try{
             return Response.status(Response.Status.OK).entity(sellerSerivce.findById(id)).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 
