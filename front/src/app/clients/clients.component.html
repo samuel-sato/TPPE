@@ -1,0 +1,34 @@
+<mat-card class="clients-card">
+  <h2>Clientes</h2>
+  <div class="header" style="display: flex; justify-content: flex-end; padding-bottom: 1%;">
+    <button mat-raised-button color="primary" class="class-button" [routerLink]="['/client']">
+      Novo
+    </button>
+  </div>
+  
+  <table mat-table [dataSource]="clients" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+             <td mat-cell *matCellDef="let element">
+              <div style="display: flex; justify-content: space-around;">
+                <a mat-icon-button [routerLink]="['/client/', element.id]">
+                  <mat-icon>edit</mat-icon>
+                </a>
+                <button mat-icon-button (click)="deleteClient(element.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </td>
+        </ng-container>
+        
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</mat-card>

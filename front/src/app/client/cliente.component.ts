@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from '../service/cliente.service';
 
 @Component({
-  selector: 'app-cliente',
+  selector: 'app-client',
   imports: [
     ReactiveFormsModule,
     MatInputModule,
@@ -29,8 +29,8 @@ import { ClienteService } from '../service/cliente.service';
   styleUrl: './cliente.component.css',
   providers: [provideNativeDateAdapter()]
 })
-export class ClienteComponent implements OnInit {
-  clienteForm: FormGroup;
+export class ClientComponent implements OnInit {
+  clientForm: FormGroup;
   hide = true;
   exampleHeader: any;
   id: string | null = null;
@@ -40,10 +40,10 @@ export class ClienteComponent implements OnInit {
     private fb: FormBuilder, 
     private crudService: ClienteService,
     private route: ActivatedRoute) {
-    this.clienteForm = this.fb.group({
+    this.clientForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      nome: ['', Validators.required],
+      name: ['', Validators.required],
       dataNascimento: ['', Validators.required],
       notificarPromocoes: [false] // Campo para notificar promoções, padrão é false
     });
@@ -55,15 +55,15 @@ export class ClienteComponent implements OnInit {
     if (this.id) {
       this.crudService.getById(this.id).subscribe({
         next: (cliente: Client) => {
-          this.clienteForm.patchValue({
+          this.clientForm.patchValue({
             email: cliente.email,
             password: cliente.password, // cuidado: normalmente senhas não vêm do backend
-            nome: cliente.name,
+            name: cliente.name,
             dataNascimento: new Date(cliente.birthdate),
             notificarPromocoes: cliente.notifyPromotion
           });
           console.log('Cliente encontrado:', cliente);
-          this.titulo = 'Dados pessoais';
+          this.titulo = 'Dados do Cliente';
         },
         error: (err) => {
           console.error('Erro ao buscar cliente:', err);
@@ -74,8 +74,8 @@ export class ClienteComponent implements OnInit {
 
   onSubmit() {
     
-    if (this.clienteForm.valid) {
-      const { email, password, nome, dataNascimento, notificarPromocoes } = this.clienteForm.value;
+    if (this.clientForm.valid) {
+      const { email, password, nome, dataNascimento, notificarPromocoes } = this.clientForm.value;
 
       var cliente: Client ={
         name: nome,

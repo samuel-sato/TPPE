@@ -1,10 +1,10 @@
 <mat-card class="login-card">
   <h2>{{titulo}}</h2>
 
-  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Nome completo</mat-label>
-      <input matInput formControlName="nome" required>
+      <input matInput formControlName="name" required>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">

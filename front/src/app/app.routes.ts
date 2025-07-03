@@ -1,15 +1,17 @@
 import { Routes } from '@angular/router';
 import { DepartmentsComponent } from './departments/departments.component';
 import { LoginComponent } from './login/login.component';
-import { ClienteComponent } from './cliente/cliente.component';
+import { ClientComponent } from './client/cliente.component';
 import { DepartmentComponent } from './department/department.component';
 import { SellerComponent } from './seller/seller.component';
 import { SellersComponent } from './sellers/sellers.component';
+import { ClientsComponent } from './clients/clients.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
-    {path: 'cliente', component: ClienteComponent},
-    {path: 'cliente/:id', component: ClienteComponent },
+    {path: 'clients', component: ClientsComponent},
+    {path: 'client', component: ClientComponent},
+    {path: 'client/:id', component: ClientComponent },
     {path: 'departments', component: DepartmentsComponent},
     {path: 'department', component: DepartmentComponent},
     {path: 'department/:id', component: DepartmentComponent},
