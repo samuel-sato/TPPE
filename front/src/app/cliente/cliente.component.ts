@@ -34,6 +34,7 @@ export class ClienteComponent implements OnInit {
   hide = true;
   exampleHeader: any;
   id: string | null = null;
+  titulo: string = 'Cadastro de Cliente';
   
   constructor(
     private fb: FormBuilder, 
@@ -62,6 +63,7 @@ export class ClienteComponent implements OnInit {
             notificarPromocoes: cliente.notifyPromotion
           });
           console.log('Cliente encontrado:', cliente);
+          this.titulo = 'Dados pessoais';
         },
         error: (err) => {
           console.error('Erro ao buscar cliente:', err);

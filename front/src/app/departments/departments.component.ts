@@ -4,10 +4,16 @@ import { DepartmentService } from '../service/department.service';
 import { DepartmentList } from '../entity/DepartmentList';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-departments',
-  imports: [MatTableModule, CommonModule,MatIconModule],
+  imports: [
+    MatTableModule, 
+    CommonModule,
+    MatIconModule,
+    MatCardModule
+  ],
   templateUrl: './departments.component.html',
   styleUrl: './departments.component.css'
 })
