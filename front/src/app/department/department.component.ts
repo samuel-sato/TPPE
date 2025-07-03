@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DepartmentService } from '../service/department.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Department } from '../entity/Departament';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
