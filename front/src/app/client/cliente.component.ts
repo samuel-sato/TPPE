@@ -41,9 +41,9 @@ export class ClientComponent implements OnInit {
     private crudService: ClienteService,
     private route: ActivatedRoute) {
     this.clientForm = this.fb.group({
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      name: ['', Validators.required],
       dataNascimento: ['', Validators.required],
       notificarPromocoes: [false] // Campo para notificar promoções, padrão é false
     });
@@ -56,9 +56,9 @@ export class ClientComponent implements OnInit {
       this.crudService.getById(this.id).subscribe({
         next: (cliente: Client) => {
           this.clientForm.patchValue({
+            name: cliente.name,
             email: cliente.email,
             password: cliente.password, // cuidado: normalmente senhas não vêm do backend
-            name: cliente.name,
             dataNascimento: new Date(cliente.birthdate),
             notificarPromocoes: cliente.notifyPromotion
           });
@@ -75,10 +75,10 @@ export class ClientComponent implements OnInit {
   onSubmit() {
     
     if (this.clientForm.valid) {
-      const { email, password, nome, dataNascimento, notificarPromocoes } = this.clientForm.value;
+      const { email, password, name, dataNascimento, notificarPromocoes } = this.clientForm.value;
 
       var cliente: Client ={
-        name: nome,
+        name: name,
         email: email,
         password: password,
         birthdate: new Date(dataNascimento),
@@ -89,14 +89,15 @@ export class ClientComponent implements OnInit {
 
       if (this.id) {
         // Atualizar
-        // this.crudService.update(this.id, cliente).subscribe({
-        //   next: (response) => {
-        //     console.log('Cliente atualizado com sucesso:', response);
-        //   },
-        //   error: (error) => {
-        //     console.error('Erro ao atualizar cliente:', error);
-        //   }
-        // });
+        cliente.id = parseInt(this.id, 10);
+        this.crudService.update(cliente).subscribe({
+          next: (response) => {
+            console.log('Cliente atualizado com sucesso:', response);
+          },
+          error: (error) => {
+            console.error('Erro ao atualizar cliente:', error);
+          }
+        });
       } 
       else {
         // Criar

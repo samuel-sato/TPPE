@@ -31,13 +31,7 @@ export class ProductComponent implements OnInit{
   productForm: FormGroup;
   titulo: string = 'Cadastro de Produto';
 
-  private product: Product = {
-    name: '',
-    description: '',
-    price: 0,
-    department: '',
-    idDepartment: 0
-  };
+  
 
   constructor(
     private fb: FormBuilder, 
@@ -94,14 +88,15 @@ export class ProductComponent implements OnInit{
   
         if (this.id) {
           // Atualizar
-          // this.crudService.update(this.id, cliente).subscribe({
-          //   next: (response) => {
-          //     console.log('Cliente atualizado com sucesso:', response);
-          //   },
-          //   error: (error) => {
-          //     console.error('Erro ao atualizar cliente:', error);
-          //   }
-          // });
+          product.id = parseInt(this.id, 10);
+          this.crudService.update(product).subscribe({
+            next: (response) => {
+              console.log('Cliente atualizado com sucesso:', response);
+            },
+            error: (error) => {
+              console.error('Erro ao atualizar cliente:', error);
+            }
+          });
         } 
         else {
           // Criar
