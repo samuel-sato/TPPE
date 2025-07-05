@@ -100,14 +100,15 @@ export class SellerComponent implements OnInit {
   
         if (this.id) {
           // Atualizar
-          // this.crudService.update(this.id, cliente).subscribe({
-          //   next: (response) => {
-          //     console.log('Cliente atualizado com sucesso:', response);
-          //   },
-          //   error: (error) => {
-          //     console.error('Erro ao atualizar cliente:', error);
-          //   }
-          // });
+          seller.id = parseInt(this.id, 10);
+          this.crudService.update(seller).subscribe({
+            next: (response) => {
+              console.log('Cliente atualizado com sucesso:', response);
+            },
+            error: (error) => {
+              console.error('Erro ao atualizar cliente:', error);
+            }
+          });
         } 
         else {
           // Criar

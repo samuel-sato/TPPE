@@ -65,6 +65,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
         schema.getPersonSchema().setName(entity.getPerson().getName());
         schema.getPersonSchema().setEmail(entity.getPerson().getEmail());
         schema.getPersonSchema().setBirthdate(entity.getPerson().getBirthdate());
+        schema.getPersonSchema().setPassword(entity.getPerson().getPassword());
 
         persist(schema);
         return mapper.toDomain(schema);
