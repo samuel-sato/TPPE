@@ -39,6 +39,12 @@ export abstract class CrudBaseService<E extends BaseEntity> {
     );
   }
 
+  update(item: E): Observable<E> {
+    return this.http.put<E>(`${this.url}/${item.id}`, item, { headers: this.headers }).pipe(
+      catchError(error => this.handleError(error)) // corrigido aqui
+    );
+  }
+
   
   getAll(): Observable<E[]> {
     return this.http.get<E[]>(this.url, { headers: this.headers }).pipe(
