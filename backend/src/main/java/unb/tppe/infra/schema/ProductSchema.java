@@ -36,7 +36,7 @@ public class ProductSchema {
     private DepartmentSchema department;
 
     @ManyToMany(mappedBy = "products")
-    private List<SaleSchema> sales = new ArrayList<>();;
+    private List<SaleSchema> sales = new ArrayList<>();
 
     private String name;
     private double price;

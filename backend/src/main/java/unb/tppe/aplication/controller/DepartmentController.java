@@ -54,7 +54,7 @@ public class DepartmentController {
 
     @PUT
     @Path("{id}")
-    public Response update(Long id, ProductDTO dto){
+    public Response update(Long id, DepartmentDTO dto){
         return Response.status(Response.Status.OK).entity(service.update(id, dto)).build();
     }
 

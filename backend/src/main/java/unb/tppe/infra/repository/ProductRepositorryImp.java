@@ -29,13 +29,17 @@ public class ProductRepositorryImp implements ProductRepository, PanacheReposito
     @Transactional
     public Product create(Product entity) {
 
-        Optional<DepartmentSchema> departmentSchema = departmentRepository.listSchemaById(entity.getIdDepartment());
-
-        if (!departmentSchema.isPresent())
-            throw new RuntimeException("Departamento não encontrado");
-
         ProductSchema schema = mapper.toSchema(entity);
-        schema.setDepartment(departmentSchema.get());
+
+        if(entity.getIdDepartment() != null){
+            Optional<DepartmentSchema> departmentSchema = departmentRepository.listSchemaById(entity.getIdDepartment());
+
+            if (!departmentSchema.isPresent())
+                throw new RuntimeException("Departamento não encontrado");
+
+            schema.setDepartment(departmentSchema.get());
+        }
+
         persist(schema);
         return mapper.toDomain(schema);
     }
@@ -91,5 +95,10 @@ public class ProductRepositorryImp implements ProductRepository, PanacheReposito
             return true;
         }
         return false;
+    }
+
+    public List<ProductSchema> findByListId(List<Long> ids){
+        List<ProductSchema> products = list("id in ?1", ids);
+        return products;
     }
 }

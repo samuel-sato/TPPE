@@ -4,7 +4,9 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import unb.tppe.domain.entity.Department;
+import unb.tppe.domain.entity.Product;
 import unb.tppe.domain.respository.DepartmentRepository;
+import unb.tppe.domain.respository.ProductRepository;
 import unb.tppe.infra.mapping.DepartmentMapper;
 import unb.tppe.infra.schema.DepartmentSchema;
 import unb.tppe.infra.schema.ProductSchema;
@@ -17,14 +19,31 @@ import java.util.Optional;
 public class DepartmentRepositoryImp implements DepartmentRepository, PanacheRepository<DepartmentSchema> {
 
     private DepartmentMapper mapper;
+    private ProductRepositorryImp productRepositorryImp;
 
-    public DepartmentRepositoryImp(DepartmentMapper mapper){
+    public DepartmentRepositoryImp(DepartmentMapper mapper, ProductRepositorryImp productRepositorryImp){
         this.mapper = mapper;
+        this.productRepositorryImp = productRepositorryImp;
     }
 
     @Transactional
     public Department create(Department entity) {
         DepartmentSchema schema = mapper.toSchema(entity);
+
+        //buscar produtos
+        if(entity.getProducts() != null){
+            List<ProductSchema> productSchemas = productRepositorryImp.listByIdList(
+                    entity.getProducts()
+                            .stream()
+                            .map(p -> p.getId())
+                            .toList());
+
+            schema.setProducts(productSchemas);
+        }
+        else
+            schema.setProducts(List.of());
+
+
         persist(schema);
         return mapper.toDomain(schema);
     }
@@ -55,6 +74,24 @@ public class DepartmentRepositoryImp implements DepartmentRepository, PanacheRep
 
         schema.setName(entity.getName());
         schema.setDescription(entity.getDescription());
+
+        if (entity.getProducts() != null && !entity.getProducts().isEmpty()) {
+            List<ProductSchema> productSchemas = productRepositorryImp.listByIdList(
+                    entity.getProducts().stream()
+                            .map(Product::getId)
+                            .toList()
+            );
+
+            // Atualiza a referência bidirecional
+            productSchemas.forEach(p -> p.setDepartment(schema));
+
+            schema.setProducts(productSchemas);
+        } else {
+            // Remove produtos do departamento
+            schema.getProducts().forEach(p -> p.setDepartment(null));
+            schema.getProducts().clear(); // limpa a lista no schema
+        }
+
         persist(schema);
         return mapper.toDomain(schema);
     }

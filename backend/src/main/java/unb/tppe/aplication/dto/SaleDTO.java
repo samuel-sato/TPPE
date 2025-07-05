@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -16,5 +17,7 @@ import java.util.List;
 public class SaleDTO {
     private Long idClient;
     private Long idSeller;
+    private LocalDate dateSale;
+    private double price;
     private List<Long> idsProduct;
 }

@@ -38,11 +38,14 @@ public class DepartmentSerivce {
         Department product = Department.builder()
                 .name(dto.getName())
                 .description(dto.getDescription())
-                .products(
-                        dto.getProducts()
-                        .stream()
-                        .map(id -> Product.builder().id(id).build())
-                        .collect(Collectors.toUnmodifiableList()))
+                .products((List<Product>) dto.getProducts().stream().map(p ->
+                        Product.builder()
+                                .id(p.getId())
+                                .idDepartment(dto.getId())
+                                .price(p.getPrice())
+                                .name(p.getName())
+                                .description(p.getDescription())
+                                .build()).toList())
                 .build();
 
         return createUseCase.execute(product);
@@ -56,12 +59,21 @@ public class DepartmentSerivce {
         return readUseCase.findById(id);
     }
 
-    public Department update(Long id, ProductDTO dto){
+    public Department update(Long id, DepartmentDTO dto){
 
         Department product = Department.builder()
                 .id(id)
                 .name(dto.getName())
                 .description(dto.getDescription())
+                .products(
+                        (List<Product>) dto.getProducts().stream().map(p ->
+                                Product.builder()
+                                        .id(p.getId())
+                                        .idDepartment(dto.getId())
+                                        .price(p.getPrice())
+                                        .name(p.getName())
+                                        .description(p.getDescription())
+                                        .build()).toList())
                 .build();
 
         return updateUseCase.execute(id, product);

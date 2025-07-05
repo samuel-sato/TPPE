@@ -5,6 +5,9 @@ import unb.tppe.domain.entity.Product;
 import unb.tppe.domain.mapping.Mapping;
 import unb.tppe.infra.schema.ProductSchema;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @ApplicationScoped
 public class ProductMapper implements Mapping<Product, ProductSchema> {
 
@@ -19,8 +22,12 @@ public class ProductMapper implements Mapping<Product, ProductSchema> {
                 .name(schema.getName())
                 .price(schema.getPrice())
                 .description(schema.getDescription())
-                .idDepartment(schema.getDepartment().getId())
+                .idDepartment(schema.getDepartment() != null ? schema.getDepartment().getId() : null)
                 .build();
+    }
+
+    public List<Product> toDomain(List<ProductSchema> productSchemaList){
+        return productSchemaList.stream().map(this::toDomain).toList();
     }
 
     public ProductSchema toSchema(Product entity) {
