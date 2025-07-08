@@ -58,4 +58,10 @@ export abstract class CrudBaseService<E extends BaseEntity> {
       catchError(error => this.handleError(error))
     );
   }
+
+  delete(id: string | number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`, { headers: this.headers }).pipe(
+      catchError(error => this.handleError(error))
+    );
+  }
 }

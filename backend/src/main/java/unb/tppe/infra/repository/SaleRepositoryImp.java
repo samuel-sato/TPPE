@@ -3,9 +3,12 @@ package unb.tppe.infra.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import unb.tppe.domain.entity.BaseEntity;
 import unb.tppe.domain.entity.Sale;
 import unb.tppe.domain.respository.SaleRepository;
+import unb.tppe.infra.mapping.ClientMapper;
 import unb.tppe.infra.mapping.SaleMapper;
+import unb.tppe.infra.mapping.SellerMapper;
 import unb.tppe.infra.schema.ClientSchema;
 import unb.tppe.infra.schema.ProductSchema;
 import unb.tppe.infra.schema.SaleSchema;
@@ -23,7 +26,11 @@ public class SaleRepositoryImp implements SaleRepository, PanacheRepository<Sale
     private SellerRepositorryImp sellerRepositorry;
     private ProductRepositorryImp productRepositorry;
 
-    public SaleRepositoryImp(ClientRepositoryImp clientRepository, SellerRepositorryImp sellerRepositorry, ProductRepositorryImp productRepositorry, SaleMapper mapper){
+    public SaleRepositoryImp(
+            ClientRepositoryImp clientRepository,
+            SellerRepositorryImp sellerRepositorry,
+            ProductRepositorryImp productRepositorry,
+            SaleMapper mapper){
         this.mapper = mapper;
         this.clientRepository = clientRepository;
         this.sellerRepositorry = sellerRepositorry;
@@ -33,9 +40,9 @@ public class SaleRepositoryImp implements SaleRepository, PanacheRepository<Sale
 
     @Transactional
     public Sale create(Sale entity) {
-        Optional<ClientSchema> clientSchema = clientRepository.listSchemaById(entity.getIdClient());
-        Optional<SellerSchema> sellerSchema = sellerRepositorry.findByIdOptional(entity.getIdSeller());
-        List<ProductSchema> productSchemas = productRepositorry.listByIdList(entity.getIdProducts());
+        Optional<ClientSchema> clientSchema = clientRepository.listSchemaById(entity.getClient().getId());
+        Optional<SellerSchema> sellerSchema = sellerRepositorry.findByIdOptional(entity.getSeller().getId());
+        List<ProductSchema> productSchemas = productRepositorry.listByIdList(entity.getProducts().stream().map(BaseEntity::getId).toList());
 
         if (!clientSchema.isPresent())
             throw new RuntimeException("Cliente não encontrado");
@@ -43,12 +50,15 @@ public class SaleRepositoryImp implements SaleRepository, PanacheRepository<Sale
         if (!sellerSchema.isPresent())
             throw new RuntimeException("Vendedor não encontrado");
 
+        double price = productSchemas.stream().mapToDouble(ProductSchema::getPrice).sum();
+
         SaleSchema schema = mapper.toSchema(entity);
 
         schema.setDateSale(LocalDate.now());
         schema.setClient(clientSchema.get());
         schema.setSeller(sellerSchema.get());
         schema.setProducts(productSchemas);
+        schema.setPrice(price);
 
         persist(schema);
         return  mapper.toDomain(schema);
@@ -73,9 +83,9 @@ public class SaleRepositoryImp implements SaleRepository, PanacheRepository<Sale
         if(schema == null)
             throw new RuntimeException("Venda não encontrada");
 
-        Optional<ClientSchema> clientSchema = clientRepository.listSchemaById(entity.getIdClient());
-        Optional<SellerSchema> sellerSchema = sellerRepositorry.findByIdOptional(entity.getIdSeller());
-        List<ProductSchema> productSchemas = productRepositorry.listByIdList(entity.getIdProducts());
+        Optional<ClientSchema> clientSchema = clientRepository.listSchemaById(entity.getClient().getId());
+        Optional<SellerSchema> sellerSchema = sellerRepositorry.findByIdOptional(entity.getSeller().getId());
+        List<ProductSchema> productSchemas = productRepositorry.listByIdList(entity.getProducts().stream().map(BaseEntity::getId).toList());
 
         if (clientSchema.isEmpty())
             throw new RuntimeException("Cliente não encontrado");
@@ -83,9 +93,12 @@ public class SaleRepositoryImp implements SaleRepository, PanacheRepository<Sale
         if (sellerSchema.isEmpty())
             throw new RuntimeException("Vendedor não encontrado");
 
+        double price = productSchemas.stream().mapToDouble(ProductSchema::getPrice).sum();
+
         schema.setClient(clientSchema.get());
         schema.setSeller(sellerSchema.get());
         schema.setProducts(productSchemas);
+        schema.setPrice(price);
 
         persist(schema);
         return mapper.toDomain(schema);

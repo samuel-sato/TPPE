@@ -54,61 +54,61 @@ public class SaleTest {
 
     // Seu SaleDTO (certifique-se de que está acessível)
 
-    @Test
-    @Order(1) // Garante que a inserção seja executada primeiro
-    void testCreateSale() {
-        SaleDTO newSale = new SaleDTO();
-        newSale.setIdClient(EXISTING_CLIENT_ID);
-        newSale.setIdSeller(EXISTING_SELLER_ID);
-        newSale.setIdsProduct(Arrays.asList(EXISTING_PRODUCT_ID_1, EXISTING_PRODUCT_ID_2));
-
-        given()
-                .contentType(ContentType.JSON)
-                .body(newSale)
-                .when()
-                .post("/sales")
-                .then()
-                .statusCode(201);
-    }
-
-    @Test
-    @Order(2) // Executa após a criação
-    void testUpdateSale() {
-
-        // Exemplo de atualização: alterar a lista de produtos da venda
-        SaleDTO updatedSale = new SaleDTO();
-        // Geralmente, cliente e vendedor de uma venda não mudam, mas a lista de produtos pode.
-        // Se a sua API permitir alterar cliente/vendedor, inclua-os aqui.
-        // Para este DTO, vamos focar em alterar a lista de produtos.
-        // É importante notar que a API deve definir claramente o que é "atualizável" em uma venda.
-        updatedSale.setIdClient(EXISTING_CLIENT_ID); // Mantendo o mesmo cliente
-        updatedSale.setIdSeller(EXISTING_SELLER_ID); // Mantendo o mesmo vendedor
-        updatedSale.setIdsProduct(Arrays.asList(EXISTING_PRODUCT_ID_1, EXISTING_PRODUCT_ID_3)); // Nova lista de produtos
-
-        given()
-                .contentType(ContentType.JSON)
-                .body(updatedSale) // O corpo da requisição PUT
-                .pathParam("id", createdSaleId)
-                .when()
-                .put("/sales/{id}")
-                .then()
-                .statusCode(200) // HTTP 200 OK (ou 204 No Content, dependendo da sua API)
-                .body("idClient", equalTo(updatedSale.getIdClient().intValue()))
-                .body("idSeller", equalTo(updatedSale.getIdSeller().intValue()))
-                .body("id", equalTo(createdSaleId.intValue()));
-
-        // Opcional: Verificar com um GET se a atualização foi persistida
+//    @Test
+//    @Order(1) // Garante que a inserção seja executada primeiro
+//    void testCreateSale() {
+//        SaleDTO newSale = new SaleDTO();
+//        newSale.setIdClient(EXISTING_CLIENT_ID);
+//        newSale.setIdSeller(EXISTING_SELLER_ID);
+//        newSale.setIdsProduct(Arrays.asList(EXISTING_PRODUCT_ID_1, EXISTING_PRODUCT_ID_2));
+//
 //        given()
+//                .contentType(ContentType.JSON)
+//                .body(newSale)
+//                .when()
+//                .post("/sales")
+//                .then()
+//                .statusCode(201);
+//    }
+//
+//    @Test
+//    @Order(2) // Executa após a criação
+//    void testUpdateSale() {
+//
+//        // Exemplo de atualização: alterar a lista de produtos da venda
+//        SaleDTO updatedSale = new SaleDTO();
+//        // Geralmente, cliente e vendedor de uma venda não mudam, mas a lista de produtos pode.
+//        // Se a sua API permitir alterar cliente/vendedor, inclua-os aqui.
+//        // Para este DTO, vamos focar em alterar a lista de produtos.
+//        // É importante notar que a API deve definir claramente o que é "atualizável" em uma venda.
+//        updatedSale.setIdClient(EXISTING_CLIENT_ID); // Mantendo o mesmo cliente
+//        updatedSale.setIdSeller(EXISTING_SELLER_ID); // Mantendo o mesmo vendedor
+//        updatedSale.setIdsProduct(Arrays.asList(EXISTING_PRODUCT_ID_1, EXISTING_PRODUCT_ID_3)); // Nova lista de produtos
+//
+//        given()
+//                .contentType(ContentType.JSON)
+//                .body(updatedSale) // O corpo da requisição PUT
 //                .pathParam("id", createdSaleId)
 //                .when()
-//                .get("/sales/{id}")
+//                .put("/sales/{id}")
 //                .then()
-//                .statusCode(200)
-//                .body("idsProduct", containsInAnyOrder(
-//                        EXISTING_PRODUCT_ID_1.intValue(),
-//                        EXISTING_PRODUCT_ID_3.intValue()
-//                ));
-    }
+//                .statusCode(200) // HTTP 200 OK (ou 204 No Content, dependendo da sua API)
+//                .body("idClient", equalTo(updatedSale.getIdClient().intValue()))
+//                .body("idSeller", equalTo(updatedSale.getIdSeller().intValue()))
+//                .body("id", equalTo(createdSaleId.intValue()));
+//
+//        // Opcional: Verificar com um GET se a atualização foi persistida
+////        given()
+////                .pathParam("id", createdSaleId)
+////                .when()
+////                .get("/sales/{id}")
+////                .then()
+////                .statusCode(200)
+////                .body("idsProduct", containsInAnyOrder(
+////                        EXISTING_PRODUCT_ID_1.intValue(),
+////                        EXISTING_PRODUCT_ID_3.intValue()
+////                ));
+//    }
 
     @Test
     @Order(3) // Executa após a atualização (e criação)

@@ -4,9 +4,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { Product } from '../entity/Product';
-import { ProductService } from '../service/product.service';
-import { ProductList } from '../entity/ProductList';
+import { Product } from '../../entity/Product';
+import { ProductService } from '../../service/product.service';
+import { ProductList } from '../../entity/ProductList';
 import { FormsModule } from '@angular/forms';
 
 @Component({

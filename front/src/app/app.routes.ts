@@ -8,6 +8,8 @@ import { SellersComponent } from './sellers/sellers.component';
 import { ClientsComponent } from './clients/clients.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
+import { SalesComponent } from './sales/sales.component';
+import { SaleComponent } from './sale/sale.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -22,6 +24,9 @@ export const routes: Routes = [
     {path: 'seller/:id', component: SellerComponent},
     {path: 'products', component: ProductsComponent},
     {path: 'product', component: ProductComponent},
-    {path: 'product/:id', component: ProductComponent}
+    {path: 'product/:id', component: ProductComponent},
+    {path: 'sales', component: SalesComponent},
+    {path: 'sale', component: SaleComponent},
+    {path: 'sale/:id', component: SaleComponent}
 ];
 

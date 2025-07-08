@@ -9,15 +9,25 @@ import unb.tppe.infra.schema.SaleSchema;
 @ApplicationScoped
 public class SaleMapper implements Mapping<Sale, SaleSchema> {
 
+    private ClientMapper clientMapper;
+    private SellerMapper sellerMapper;
+    private ProductMapper productMapper;
+
+    public SaleMapper(ClientMapper clientMapper, SellerMapper sellerMapper, ProductMapper productMapper){
+        this.clientMapper = clientMapper;
+        this.sellerMapper = sellerMapper;
+        this.productMapper = productMapper;
+    }
+
     public Sale toDomain(SaleSchema schema) {
 
         return Sale.builder()
                 .id(schema.getId())
-                .idClient(schema.getClient().getId())
-                .idSeller(schema.getSeller().getId())
+                .client(clientMapper.toDomain(schema.getClient()))
+                .seller(sellerMapper.toDomain(schema.getSeller()))
                 .price(schema.getPrice())
                 .dateSale(schema.getDateSale())
-                .idProducts(schema.getProducts().stream().map(ProductSchema::getId).toList())
+                .products(schema.getProducts().stream().map(p -> this.productMapper.toDomain(p)).toList())
                 .build();
     }
 

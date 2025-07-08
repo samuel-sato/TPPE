@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ProductSelectorDialogComponent } from '../dialog-product/dialog-product.component';
+import { ProductSelectorDialogComponent } from '../dialog/dialog-product/dialog-product.component';
 import { ProductList } from '../entity/ProductList';
 
 @Component({
@@ -120,16 +120,16 @@ export class DepartmentComponent implements OnInit {
 
 
 
-addProduct(): void {
-  this.dialog.open(ProductSelectorDialogComponent).afterClosed().subscribe((selecionados: ProductList[]) => {
-    if (selecionados && selecionados.length > 0) {
-      const produtosExistentes = this.department.products || [];
-      const novosProdutos = selecionados.filter(p => !produtosExistentes.some(e => e.id === p.id));
-      this.department.products = [...produtosExistentes, ...novosProdutos];
-      this.departmentForm.patchValue({ products: this.department.products });
-    }
-  });
-}
+  addProduct(): void {
+    this.dialog.open(ProductSelectorDialogComponent).afterClosed().subscribe((selecionados: ProductList[]) => {
+      if (selecionados && selecionados.length > 0) {
+        const produtosExistentes = this.department.products || [];
+        const novosProdutos = selecionados.filter(p => !produtosExistentes.some(e => e.id === p.id));
+        this.department.products = [...produtosExistentes, ...novosProdutos];
+        this.departmentForm.patchValue({ products: this.department.products });
+      }
+    });
+  }
 
 
   deleteProductDepartament(id: number) {

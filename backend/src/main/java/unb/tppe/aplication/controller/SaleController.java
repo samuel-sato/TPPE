@@ -10,6 +10,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import unb.tppe.aplication.dto.SaleDTO;
@@ -57,7 +58,7 @@ public class SaleController {
 
     @PUT
     @Path("{id}")
-    public Response update(Long id, SaleDTO dto){
+    public Response update(@PathParam("id") Long id, SaleDTO dto){
 
         try{
             return Response.status(Response.Status.OK).entity(service.update(id, dto)).build();

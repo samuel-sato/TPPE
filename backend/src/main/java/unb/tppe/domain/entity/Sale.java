@@ -13,7 +13,7 @@ import java.util.List;
 public class Sale extends BaseEntity {
     private LocalDate dateSale;
     private double price;
-    private Long idClient;
-    private Long idSeller;
-    private List<Long> idProducts;
+    private Client client;
+    private Seller seller;
+    private List<Product> products;
 }

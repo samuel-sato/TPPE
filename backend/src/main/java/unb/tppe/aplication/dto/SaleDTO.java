@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import unb.tppe.domain.entity.Product;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,9 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @ApplicationScoped
 public class SaleDTO {
-    private Long idClient;
-    private Long idSeller;
+    private ClientDTO client;
+    private SellerDTO seller;
     private LocalDate dateSale;
     private double price;
-    private List<Long> idsProduct;
+    private List<ProductDTO> products;
 }

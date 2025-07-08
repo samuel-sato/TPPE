@@ -1,14 +1,20 @@
 package unb.tppe.aplication.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import unb.tppe.aplication.dto.ProductDTO;
 import unb.tppe.aplication.dto.SaleDTO;
+import unb.tppe.domain.entity.Product;
+import unb.tppe.domain.entity.Client;
+import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.entity.Sale;
+import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SaleRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
 import unb.tppe.domain.useCase.DeleteBaseUseCase;
 import unb.tppe.domain.useCase.ReadBaseUseCase;
 import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,13 +38,52 @@ public class SaleSerivce {
     }
 
     public Sale create(SaleDTO dto){
-        Sale seller = Sale.builder()
-            .idSeller(dto.getIdSeller())
-            .idClient(dto.getIdClient())
-            .idProducts(dto.getIdsProduct())
+
+        List<Product> productList = new ArrayList<>();
+
+        for (int i=0; i<dto.getProducts().size(); i++){
+            ProductDTO pDTO = dto.getProducts().get(i);
+
+            productList.add(
+                Product.builder()
+                    .id(pDTO.getId())
+                    .idDepartment(pDTO.getIdDepartment())
+                    .department(pDTO.getDepartment())
+                    .description(pDTO.getDescription())
+                    .price(pDTO.getPrice())
+                    .name(pDTO.getName())
+                    .build());
+        }
+
+        Sale sale = Sale.builder()
+            .seller(
+                    Seller.builder()
+                        .id(dto.getSeller().getId())
+                        .numberHours(dto.getSeller().getNumberHours())
+                        .baseSalary(dto.getSeller().getBaseSalary())
+                        .person(Person.builder()
+                            .name(dto.getSeller().getName())
+                            .email(dto.getSeller().getEmail())
+                            .build()
+                        )
+                        .build())
+            .client(
+                Client.builder()
+                        .id(dto.getClient().getId())
+                        .notifyPromotion(dto.getClient().getNotifyPromotion())
+                        .person(Person.builder()
+                                .name(dto.getClient().getName())
+                                .email(dto.getClient().getEmail())
+                                .build()
+                        )
+                        .build()
+                    )
+            .products(productList)
+            .dateSale(dto.getDateSale())
+            .price(dto.getPrice())
             .build();
 
-        return createUseCase.execute(seller);
+        return createUseCase.execute(sale);
     }
 
     public List<Sale> listAll(){
@@ -50,13 +95,53 @@ public class SaleSerivce {
     }
 
     public Sale update(Long id, SaleDTO dto){
-        Sale seller = Sale.builder()
+
+        List<Product> productList = new ArrayList<>();
+
+        for (int i=0; i<dto.getProducts().size(); i++){
+            ProductDTO pDTO = dto.getProducts().get(i);
+
+            productList.add(
+                    Product.builder()
+                            .id(pDTO.getId())
+                            .idDepartment(pDTO.getIdDepartment())
+                            .department(pDTO.getDepartment())
+                            .description(pDTO.getDescription())
+                            .price(pDTO.getPrice())
+                            .name(pDTO.getName())
+                            .build());
+        }
+
+        Sale sale = Sale.builder()
                 .id(id)
-                .idSeller(dto.getIdSeller())
-                .idClient(dto.getIdClient())
-                .idProducts(dto.getIdsProduct())
+                .dateSale(dto.getDateSale())
+                .price(dto.getPrice())
+                .seller(
+                        Seller.builder()
+                                .id(dto.getSeller().getId())
+                                .numberHours(dto.getSeller().getNumberHours())
+                                .baseSalary(dto.getSeller().getBaseSalary())
+                                .person(Person.builder()
+                                        .name(dto.getSeller().getName())
+                                        .email(dto.getSeller().getEmail())
+                                        .build()
+                                )
+                                .build())
+                .client(
+                        Client.builder()
+                                .id(dto.getClient().getId())
+                                .notifyPromotion(dto.getClient().getNotifyPromotion())
+                                .person(Person.builder()
+                                        .name(dto.getClient().getName())
+                                        .email(dto.getClient().getEmail())
+                                        .build()
+                                )
+                                .build()
+                )
+                .products(productList)
                 .build();
-        return updateBseCase.execute(id, seller);
+
+        return updateBseCase.execute(id, sale);
     }
 
     public boolean deleteById(Long id){
