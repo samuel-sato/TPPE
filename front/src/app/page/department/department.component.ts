@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, model, OnInit, signal } from '@angular/core';
-import { DepartmentService } from '../service/department.service';
+import { DepartmentService } from '../../service/department.service';
 import { ActivatedRoute } from '@angular/router';
-import { Department } from '../entity/Department';
+import { Department } from '../../entity/Department';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,8 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ProductSelectorDialogComponent } from '../dialog/dialog-product/dialog-product.component';
-import { ProductList } from '../entity/ProductList';
+import { ProductSelectorDialogComponent } from '../../dialog/dialog-product/dialog-product.component';
+import { ProductList } from '../../entity/ProductList';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationComponent } from '../../notification/notification.component';
 
 @Component({
   selector: 'app-department',
@@ -29,7 +31,7 @@ import { ProductList } from '../entity/ProductList';
 })
 export class DepartmentComponent implements OnInit {
 
-
+  private _snackBar = inject(MatSnackBar);
   id: string | null = null;
   departmentForm: FormGroup;
   titulo: string = 'Cadastro de Departamento';
@@ -45,7 +47,8 @@ export class DepartmentComponent implements OnInit {
     private fb: FormBuilder, 
     private crudService: DepartmentService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogConfirmacao: MatDialog
   ) 
   {
     this.departmentForm = this.fb.group({
@@ -95,10 +98,10 @@ export class DepartmentComponent implements OnInit {
         // Atualizar
         this.crudService.update(this.department).subscribe({
           next: (response) => {
-            console.log('Cliente atualizado com sucesso:', response);
+            this.notificarSucesso();
           },
           error: (error) => {
-            console.error('Erro ao atualizar cliente:', error);
+            this.notificarErro();
           }
         });
       } 
@@ -106,12 +109,10 @@ export class DepartmentComponent implements OnInit {
         // Criar
         this.crudService.create(this.department).subscribe({
           next: (response) => {
-            console.log('Departamento cadastrado com sucesso:', response);
-            // Exibir mensagem de sucesso ou redirecionar
+            this.notificarSucesso();
           },
           error: (error) => {
-            console.error('Erro ao cadastrar departamento:', error);
-            // Exibir mensagem de erro ou redirecionar
+            this.notificarErro();
           }
         });
       }
@@ -137,9 +138,30 @@ export class DepartmentComponent implements OnInit {
     if (this.department.products) {
       this.department.products = this.department.products.filter(product => product.id !== id);
       this.departmentForm.patchValue({ products: this.department.products });
-      console.log('Produto removido do departamento:', id);
-    } else {
-      console.error('Nenhum produto encontrado no departamento.');
     }
   }
+
+  notificarSucesso(){
+      this._snackBar.openFromComponent(NotificationComponent, {
+        duration: 5 * 1000,
+        data: {
+          message: 'Departamento cadastrado com sucesso!', // Sua mensagem de sucesso
+          // Você pode adicionar um tipo, se quiser cores diferentes para sucesso/erro
+          type: 'success'
+        },
+        panelClass: ['snackbar-success'] // Opcional: para aplicar estilos CSS
+      });
+    }
+  
+    notificarErro(){
+      this._snackBar.openFromComponent(NotificationComponent, {
+        duration: 5 * 1000,
+        data: {
+          message: 'Erro ao salvar departamento. Tente novamente.', // Sua mensagem de erro
+          type: 'error'
+        },
+        panelClass: ['snackbar-error'] // Opcional: para aplicar estilos CSS
+      });
+    }
+  
 }

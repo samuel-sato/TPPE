@@ -1,0 +1,29 @@
+mat-form-field {
+  margin-right: 12px;
+}
+
+/* styles.css (ou no CSS global) */
+
+.snackbar-success {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+}
+
+.snackbar-error {
+  background-color: #f44336; /* Vermelho */
+  color: white;
+}
+
+/* Opcional: Estilos para o texto dentro do componente de notificação */
+.notification-message {
+  font-weight: bold;
+}
+
+/* Estilos para o texto baseado no tipo, se você passar 'type' no data */
+.notification-message.success {
+  color: white; /* ou outra cor */
+}
+
+.notification-message.error {
+  color: white; /* ou outra cor */
+}

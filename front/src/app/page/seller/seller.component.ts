@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -6,10 +6,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
-import { Seller } from '../entity/Seller';
-import { SellerService } from '../service/seller.service';
+import { Seller } from '../../entity/Seller';
+import { SellerService } from '../../service/seller.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationComponent } from '../../notification/notification.component';
 
 @Component({
   selector: 'app-seller',
@@ -28,6 +31,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 })
 export class SellerComponent implements OnInit {
 
+  private _snackBar = inject(MatSnackBar);
   id: string | null = null;
   sellerForm: FormGroup;
   titulo: string = 'Cadastro de Vendedor';
@@ -45,7 +49,8 @@ export class SellerComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private crudService: SellerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialogConfirmacao: MatDialog
   ) 
   {
     this.sellerForm = this.fb.group({
@@ -103,10 +108,10 @@ export class SellerComponent implements OnInit {
           seller.id = parseInt(this.id, 10);
           this.crudService.update(seller).subscribe({
             next: (response) => {
-              console.log('Cliente atualizado com sucesso:', response);
+              this.notificarSucesso();
             },
             error: (error) => {
-              console.error('Erro ao atualizar cliente:', error);
+              this.notificarErro();
             }
           });
         } 
@@ -114,14 +119,37 @@ export class SellerComponent implements OnInit {
           // Criar
           this.crudService.create(seller).subscribe({
             next: (response) => {
-              console.log('Seller cadastrado com sucesso:', response);
+              this.notificarSucesso();
             },
             error: (error) => {
-              console.error('Erro ao cadastrar seller:', error);
+              this.notificarErro();
             }
           });
         }
         
       }
     }
+
+  notificarSucesso(){
+    this._snackBar.openFromComponent(NotificationComponent, {
+      duration: 5 * 1000,
+      data: {
+        message: 'Cliente cadastrado com sucesso!', // Sua mensagem de sucesso
+        // Você pode adicionar um tipo, se quiser cores diferentes para sucesso/erro
+        type: 'success'
+      },
+      panelClass: ['snackbar-success'] // Opcional: para aplicar estilos CSS
+    });
+  }
+  
+  notificarErro(){
+    this._snackBar.openFromComponent(NotificationComponent, {
+      duration: 5 * 1000,
+      data: {
+        message: 'Erro ao salvar cliente. Tente novamente.', // Sua mensagem de erro
+        type: 'error'
+      },
+      panelClass: ['snackbar-error'] // Opcional: para aplicar estilos CSS
+    });
+  }
 }
