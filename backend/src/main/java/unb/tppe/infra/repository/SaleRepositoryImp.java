@@ -42,10 +42,10 @@ public class SaleRepositoryImp implements SaleRepository, PanacheRepository<Sale
         Optional<SellerSchema> sellerSchema = sellerRepositorry.findByIdOptional(entity.getSeller().getId());
         List<ProductSchema> productSchemas = productRepositorry.listByIdList(entity.getProducts().stream().map(BaseEntity::getId).toList());
 
-        if (!clientSchema.isPresent())
+        if (clientSchema.isEmpty())
             throw new RuntimeException("Cliente não encontrado");
 
-        if (!sellerSchema.isPresent())
+        if (sellerSchema.isEmpty())
             throw new RuntimeException("Vendedor não encontrado");
 
         double price = productSchemas.stream().mapToDouble(ProductSchema::getPrice).sum();

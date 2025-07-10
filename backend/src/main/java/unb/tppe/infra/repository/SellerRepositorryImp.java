@@ -42,7 +42,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
 
         if (sellerSchema.isPresent()){
             if(sellerSchema.get().getPersonSchema().getExclusionDate().isBefore(Constantes.DATA_02))
-            return Optional.of(mapper.toDomain(sellerSchema.get()));
+                return Optional.of(mapper.toDomain(sellerSchema.get()));
         }
 
 
@@ -52,8 +52,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
 
     public List<Seller> listAllEntity() {
         List<SellerSchema> sellerSchemas = listAll();
-        List<Seller> sellers = sellerSchemas.stream().map(mapper::toDomain).toList();
-        return sellers;
+        return sellerSchemas.stream().map(mapper::toDomain).toList();
     }
 
 

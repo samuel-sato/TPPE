@@ -21,9 +21,6 @@ public class UserRepositoryImp implements UserRepository, PanacheRepository<Pers
     public Optional<Person> findUserByEmail(String email) {
         Optional<PersonSchema> personSchemaOptional = find("email", email).firstResultOptional();
 
-        if(personSchemaOptional.isPresent()){
-            return Optional.of(mapper.toDomain(personSchemaOptional.get()));
-        }
-        return Optional.empty();
+        return personSchemaOptional.map(personSchema -> mapper.toDomain(personSchema));
     }
 }

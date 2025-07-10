@@ -33,7 +33,7 @@ public class ProductRepositorryImp implements ProductRepository, PanacheReposito
         if(entity.getIdDepartment() != null){
             Optional<DepartmentSchema> departmentSchema = departmentRepository.listSchemaById(entity.getIdDepartment());
 
-            if (!departmentSchema.isPresent())
+            if (departmentSchema.isEmpty())
                 throw new RuntimeException("Departamento não encontrado");
 
             schema.setDepartment(departmentSchema.get());
