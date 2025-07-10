@@ -11,24 +11,25 @@ import { ProductComponent } from './page/product/product.component';
 import { SalesComponent } from './page/sales/sales.component';
 import { SaleComponent } from './page/sale/sale.component';
 import { HomeComponent } from './page/home/home.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-    {path: 'home', component: HomeComponent},
+    {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
-    {path: 'clients', component: ClientsComponent},
-    {path: 'client', component: ClientComponent},
-    {path: 'client/:id', component: ClientComponent },
-    {path: 'departments', component: DepartmentsComponent},
-    {path: 'department', component: DepartmentComponent},
-    {path: 'department/:id', component: DepartmentComponent},
-    {path: 'sellers', component: SellersComponent},
-    {path: 'seller', component: SellerComponent},
-    {path: 'seller/:id', component: SellerComponent},
-    {path: 'products', component: ProductsComponent},
-    {path: 'product', component: ProductComponent},
-    {path: 'product/:id', component: ProductComponent},
-    {path: 'sales', component: SalesComponent},
-    {path: 'sale', component: SaleComponent},
-    {path: 'sale/:id', component: SaleComponent}
+    {path: 'clients', component: ClientsComponent, canActivate: [AuthGuard]},
+    {path: 'client', component: ClientComponent, canActivate: [AuthGuard]},
+    {path: 'client/:id', component: ClientComponent , canActivate: [AuthGuard]},
+    {path: 'departments', component: DepartmentsComponent, canActivate: [AuthGuard]},
+    {path: 'department', component: DepartmentComponent, canActivate: [AuthGuard]},
+    {path: 'department/:id', component: DepartmentComponent, canActivate: [AuthGuard]},
+    {path: 'sellers', component: SellersComponent, canActivate: [AuthGuard]},
+    {path: 'seller', component: SellerComponent, canActivate: [AuthGuard]},
+    {path: 'seller/:id', component: SellerComponent, canActivate: [AuthGuard]},
+    {path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
+    {path: 'product', component: ProductComponent, canActivate: [AuthGuard]},
+    {path: 'product/:id', component: ProductComponent, canActivate: [AuthGuard]},
+    {path: 'sales', component: SalesComponent, canActivate: [AuthGuard]},
+    {path: 'sale', component: SaleComponent, canActivate: [AuthGuard]},
+    {path: 'sale/:id', component: SaleComponent, canActivate: [AuthGuard]}
 ];
 

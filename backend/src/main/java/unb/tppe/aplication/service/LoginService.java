@@ -2,6 +2,7 @@ package unb.tppe.aplication.service;
 
 import io.smallrye.jwt.build.Jwt;
 import jakarta.enterprise.context.ApplicationScoped;
+import unb.tppe.aplication.dto.TokenDTO;
 import unb.tppe.aplication.dto.UserLoginDTO;
 import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.useCase.LoginUseCase;
@@ -20,17 +21,18 @@ public class LoginService {
         this.loginUseCase = loginUseCase;
     }
 
-    public String login(UserLoginDTO user){
+    public TokenDTO login(UserLoginDTO user){
 
         Optional<Person> optionaPerson = loginUseCase.getRoleUser(user.getEmail(), user.getPassword());
+        TokenDTO dto = new TokenDTO();
 
         if(optionaPerson.isEmpty()){
-            return "";
+            return dto;
         }
 
-
-        return generateToken(optionaPerson.get().getName(), optionaPerson.get().getRole());
-
+        String token = generateToken(optionaPerson.get().getName(), optionaPerson.get().getRole());
+        dto.setToken(token);
+        return dto;
     }
 
     private String generateToken(String userName, Integer roleNum) {

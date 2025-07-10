@@ -8,6 +8,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import unb.tppe.aplication.dto.TokenDTO;
 import unb.tppe.aplication.dto.UserLoginDTO;
 import unb.tppe.aplication.service.LoginService;
 
@@ -26,12 +27,12 @@ public class LoginController {
     @PermitAll
     public Response login(UserLoginDTO user){
 
-        String token = loginService.login(user);
+        TokenDTO tokenDto = loginService.login(user);
 
-        if(token.isEmpty()){
+        if(tokenDto.getToken() == null || tokenDto.getToken().isEmpty()){
             return Response.status(Response.Status.UNAUTHORIZED).entity("Usuário ou senha incorreto").build();
         }
 
-        return Response.status(Response.Status.OK).entity(token).build();
+        return Response.status(Response.Status.OK).entity(tokenDto).build();
     }
 }
