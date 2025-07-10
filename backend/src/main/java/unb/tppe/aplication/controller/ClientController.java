@@ -48,7 +48,7 @@ public class ClientController {
         try{
             return Response.status(Response.Status.OK).entity(serivce.findById(id)).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 

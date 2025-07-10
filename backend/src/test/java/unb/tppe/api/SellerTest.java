@@ -93,9 +93,9 @@ public class SellerTest {
                 .put("/sellers/{id}")
                 .then()
                 .statusCode(200) // HTTP 200 OK (ou 204 No Content dependendo da sua API)
-                .body("person.name", equalTo(updatedSeller.getName()))
-                .body("person.email", equalTo(updatedSeller.getEmail()))
-                .body("person.birthdate", equalTo(updatedSeller.getBirthdate().toString()))
+                .body("name", equalTo(updatedSeller.getName()))
+                .body("email", equalTo(updatedSeller.getEmail()))
+                .body("birthdate", equalTo(updatedSeller.getBirthdate().toString()))
                 .body("baseSalary", equalTo((float) updatedSeller.getBaseSalary()))
                 .body("numberHours", equalTo((float) updatedSeller.getNumberHours()))
                 .body("id", equalTo(createdSellerId.intValue())); // Verifica se o ID permanece o mesmo
@@ -107,7 +107,7 @@ public class SellerTest {
                 .get("/sellers/{id}")
                 .then()
                 .statusCode(200)
-                .body("person.name", equalTo("João Silva Atualizado"));
+                .body("name", equalTo("João Silva Atualizado"));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class SellerTest {
                 .when()
                 .get("/sellers/{id}")
                 .then()
-                .statusCode(404); // HTTP 404 Not Found
+                .statusCode(400); // HTTP 404 Not Found
     }
 
 }

@@ -33,7 +33,7 @@ public class ClientTest {
     }
 
     @ParameterizedTest()
-    @ValueSource(longs = {1L, 2L, 3L, 9L})
+    @ValueSource(longs = {1L, 2L, 3L, 4L})
     void listByIdClient(Long id){
 
         given()
@@ -103,7 +103,7 @@ public class ClientTest {
                 .get("/clients/{id}")
                 .then()
                 .statusCode(200)
-                .body("person.name", equalTo("Maria Souza Atualizada"))
+                .body("name", equalTo("Maria Souza Atualizada"))
                 .body("notifyPromotion", equalTo(false));
     }
 
@@ -124,7 +124,7 @@ public class ClientTest {
                 .when()
                 .get("/clients/{id}")
                 .then()
-                .statusCode(404); // HTTP 404 Not Found
+                .statusCode(400); // HTTP 404 Not Found
     }
 
 }

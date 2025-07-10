@@ -40,7 +40,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
         Optional<SellerSchema> sellerSchema = findByIdOptional(id);
 
         if (sellerSchema.isPresent()){
-            if(sellerSchema.get().getPersonSchema().getExclusionDate().equals(LocalDate.of(0001,01,01)))
+            if(sellerSchema.get().getPersonSchema().getExclusionDate().isBefore(LocalDate.of(0002,01,01)))
             return Optional.of(mapper.toDomain(sellerSchema.get()));
         }
 

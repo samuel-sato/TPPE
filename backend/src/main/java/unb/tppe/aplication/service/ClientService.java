@@ -73,7 +73,9 @@ public class ClientService {
                 .notifyPromotion(dto.getNotifyPromotion())
                 .build();
 
-        return updateBseCase.execute(id, seller);
+        var x = updateBseCase.execute(id, seller);
+        System.out.println(x.toString());
+        return x;
     }
 
     public boolean deleteById(Long id){

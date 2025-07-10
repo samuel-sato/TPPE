@@ -2,13 +2,13 @@
 -- INSERTS PARA A TABELA: PERSON
 -- =============================================
 -- Assumindo que os IDs serão gerados como 1, 2, 3, 4, 5, 6
-INSERT INTO PERSON (id, name, email, birthdate) VALUES (1, 'Ana Silva', 'ana.silva@example.com', '1990-05-15');
-INSERT INTO PERSON (id, name, email, birthdate) VALUES (2, 'Bruno Costa', 'bruno.costa@example.com', '1985-11-20');
-INSERT INTO PERSON (id, name, email, birthdate) VALUES (3, 'Carla Dias', 'carla.dias@example.com', '1992-02-10');
-INSERT INTO PERSON (id, name, email, birthdate) VALUES (4, 'Daniel Farias', 'daniel.farias@example.com', '1988-07-01');
-INSERT INTO PERSON (id, name, email, birthdate) VALUES (5, 'Eduarda Lima', 'eduarda.lima@example.com', '1995-09-25');
-INSERT INTO PERSON (id, name, email, birthdate) VALUES (6, 'Fábio Martins', 'fabio.martins@example.com', '1982-03-30');
-INSERT INTO PERSON (id, name, email, birthdate) VALUES (7, 'Gabriela Rocha', 'gabriela.rocha@example.com', '1999-12-05');
+INSERT INTO PERSON (id, name, email, birthdate, exclusionDate, password, role) VALUES (1, 'Ana Silva', 'ana.silva@example.com', '1990-05-15', '0001-01-01', '12345678', 1);
+INSERT INTO PERSON (id, name, email, birthdate, exclusionDate, password, role) VALUES (2, 'Bruno Costa', 'bruno.costa@example.com', '1985-11-20', '0001-01-01', '12345678', 1);
+INSERT INTO PERSON (id, name, email, birthdate, exclusionDate, password, role) VALUES (3, 'Carla Dias', 'carla.dias@example.com', '1992-02-10', '0001-01-01', '12345678', 1);
+INSERT INTO PERSON (id, name, email, birthdate, exclusionDate, password, role) VALUES (4, 'Daniel Farias', 'daniel.farias@example.com', '1988-07-01', '0001-01-01', '12345678', 1);
+INSERT INTO PERSON (id, name, email, birthdate, exclusionDate, password, role) VALUES (5, 'Eduarda Lima', 'eduarda.lima@example.com', '1995-09-25', '0001-01-01', '12345678', 1);
+INSERT INTO PERSON (id, name, email, birthdate, exclusionDate, password, role) VALUES (6, 'Fábio Martins', 'fabio.martins@example.com', '1982-03-30', '0001-01-01', '12345678', 1);
+INSERT INTO PERSON (id, name, email, birthdate, exclusionDate, password, role) VALUES (7, 'Gabriela Rocha', 'gabriela.rocha@example.com', '1999-12-05', '0001-01-01', '12345678', 1);
 
 
 -- =============================================

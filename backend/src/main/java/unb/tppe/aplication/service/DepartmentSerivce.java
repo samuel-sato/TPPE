@@ -11,6 +11,7 @@ import unb.tppe.domain.useCase.DeleteBaseUseCase;
 import unb.tppe.domain.useCase.ReadBaseUseCase;
 import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,9 @@ public class DepartmentSerivce {
     }
 
     public Department create(DepartmentDTO dto){
+
+        if(dto.getProducts() == null)
+            dto.setProducts(new ArrayList<>());
 
         Department product = Department.builder()
                 .name(dto.getName())
@@ -60,6 +64,9 @@ public class DepartmentSerivce {
     }
 
     public Department update(Long id, DepartmentDTO dto){
+
+        if(dto.getProducts() == null)
+            dto.setProducts(new ArrayList<>());
 
         Department product = Department.builder()
                 .id(id)
