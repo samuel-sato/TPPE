@@ -10,8 +10,10 @@ import { ProductsComponent } from './page/products/products.component';
 import { ProductComponent } from './page/product/product.component';
 import { SalesComponent } from './page/sales/sales.component';
 import { SaleComponent } from './page/sale/sale.component';
+import { HomeComponent } from './page/home/home.component';
 
 export const routes: Routes = [
+    {path: 'home', component: HomeComponent},
     {path: 'login', component: LoginComponent},
     {path: 'clients', component: ClientsComponent},
     {path: 'client', component: ClientComponent},

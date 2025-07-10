@@ -17,3 +17,12 @@
   margin-left: auto;
   margin-right: auto;
 }
+.mat-toolbar.mat-primary {
+  background-color: #1976D2 !important; /* Use !important para testar se é uma questão de especificidade */
+  color: #FFFFFF !important; /* Cor do texto/ícones na toolbar */
+}
+
+/* Se você também quer ajustar o texto do logo (apenas se for necessário, o seu style="" já funciona) */
+.mat-toolbar.mat-primary a {
+    color: inherit; /* Garante que o link herde a cor da toolbar */
+}

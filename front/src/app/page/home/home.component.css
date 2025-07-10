@@ -1,0 +1,79 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.filter-section {
+  display: flex;
+  justify-content: flex-end; /* Alinha o filtro à direita */
+  margin-bottom: 20px;
+}
+
+.department-filter {
+  width: 250px; /* Largura do seletor */
+  color: white; /* Cor do texto no rótulo */
+  border-radius: 4px; /* Bordas arredondadas */
+  padding: 5px 10px; /* Espaçamento interno */
+}
+
+/* Ajustes para o label e valor dentro do mat-select */
+.department-filter .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.department-filter .mat-form-field-flex {
+  align-items: center;
+  padding: 0 8px; /* Ajusta o padding interno */
+}
+
+.department-filter .mat-form-field-label {
+  color: white !important; /* Cor do label */
+}
+
+.department-filter .mat-select-value {
+  color: white !important; /* Cor do texto selecionado */
+}
+
+.department-filter .mat-select-arrow {
+  color: white !important; /* Cor da seta */
+}
+
+/* Remover a borda inferior do mat-form-field se desejar um visual mais limpo */
+.department-filter .mat-form-field-underline {
+  display: none;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 4 colunas em telas maiores, ajusta para menores */
+  gap: 20px; /* Espaçamento entre os cards */
+  justify-content: center; /* Centraliza cards se houver menos de 4 */
+}
+
+.product-card {
+  width: 100%; /* Garante que o card ocupe o espaço disponível na coluna */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex; /* Para flexbox interno para o conteúdo */
+  flex-direction: column;
+  justify-content: space-between; /* Empurra as ações para baixo */
+}
+
+.product-card mat-card-content {
+  flex-grow: 1; /* Permite que o conteúdo cresça e empurre as ações */
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end; /* Alinha botões à direita */
+  padding-top: 10px;
+}
+
+.no-products-message {
+  grid-column: 1 / -1; /* Ocupa todas as colunas */
+  text-align: center;
+  padding: 50px;
+  color: #666;
+  font-size: 1.2em;
+}
