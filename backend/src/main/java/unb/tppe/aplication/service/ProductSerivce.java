@@ -10,7 +10,6 @@ import unb.tppe.domain.useCase.ReadBaseUseCase;
 import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 import java.util.List;
-import java.util.Optional;
 
 @ApplicationScoped
 public class ProductSerivce {

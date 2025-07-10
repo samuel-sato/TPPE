@@ -1,9 +1,7 @@
 package unb.tppe.aplication.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import unb.tppe.aplication.dto.ClientDTO;
 import unb.tppe.aplication.dto.SellerDTO;
-import unb.tppe.domain.entity.Client;
 import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SellerRepository;
@@ -13,7 +11,6 @@ import unb.tppe.domain.useCase.ReadBaseUseCase;
 import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped

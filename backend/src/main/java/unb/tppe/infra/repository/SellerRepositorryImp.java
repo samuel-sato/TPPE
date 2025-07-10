@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import unb.tppe.domain.UserRoleEnum;
 import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SellerRepository;
+import unb.tppe.infra.Constantes;
 import unb.tppe.infra.mapping.SellerMapper;
 import unb.tppe.infra.schema.SellerSchema;
 
@@ -28,7 +29,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
     @Transactional
     public Seller create(Seller entity) {
         SellerSchema schema = mapper.toSchema(entity);
-        schema.getPersonSchema().setExclusionDate(LocalDate.of(0001,01,01));
+        schema.getPersonSchema().setExclusionDate(Constantes.DATA_NULL);
         schema.getPersonSchema().setRole(UserRoleEnum.SELLER.value);
         personRepository.persist(schema.getPersonSchema());
         persist(schema);
@@ -40,7 +41,7 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
         Optional<SellerSchema> sellerSchema = findByIdOptional(id);
 
         if (sellerSchema.isPresent()){
-            if(sellerSchema.get().getPersonSchema().getExclusionDate().isBefore(LocalDate.of(0002,01,01)))
+            if(sellerSchema.get().getPersonSchema().getExclusionDate().isBefore(Constantes.DATA_02))
             return Optional.of(mapper.toDomain(sellerSchema.get()));
         }
 

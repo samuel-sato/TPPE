@@ -6,9 +6,9 @@ import jakarta.transaction.Transactional;
 import unb.tppe.domain.UserRoleEnum;
 import unb.tppe.domain.entity.Client;
 import unb.tppe.domain.respository.ClientRepository;
+import unb.tppe.infra.Constantes;
 import unb.tppe.infra.mapping.ClientMapper;
 import unb.tppe.infra.schema.ClientSchema;
-import unb.tppe.infra.schema.SellerSchema;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,7 +28,7 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
     @Transactional
     public Client create(Client entity) {
         ClientSchema schema = mapper.toSchema(entity);
-        schema.getPersonSchema().setExclusionDate(LocalDate.of(0001,01,01));
+        schema.getPersonSchema().setExclusionDate(Constantes.DATA_NULL);
         schema.getPersonSchema().setRole(UserRoleEnum.CLIENT.value);
         personRepository.persist(schema.getPersonSchema());
         persist(schema);
@@ -39,7 +39,7 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
         Optional<ClientSchema> schemaOptional = findByIdOptional(id);
 
         if (schemaOptional.isPresent()){
-            if(schemaOptional.get().getPersonSchema().getExclusionDate().isBefore(LocalDate.of(0002,01,01)))
+            if(schemaOptional.get().getPersonSchema().getExclusionDate().isBefore(Constantes.DATA_02))
                 return Optional.of(mapper.toDomain(schemaOptional.get()));
         }
 
@@ -54,8 +54,8 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
 
     public List<Client> listAllEntity() {
         List<ClientSchema> schemas = listAll();
-        List<Client> clients = schemas.stream().map(mapper::toDomain).toList();
-        return clients;
+
+        return schemas.stream().map(mapper::toDomain).toList();
     }
 
     @Transactional

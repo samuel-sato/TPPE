@@ -6,7 +6,6 @@ import unb.tppe.domain.mapping.Mapping;
 import unb.tppe.infra.schema.ProductSchema;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ProductMapper implements Mapping<Product, ProductSchema> {

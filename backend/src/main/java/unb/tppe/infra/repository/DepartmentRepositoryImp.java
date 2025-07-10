@@ -3,10 +3,10 @@ package unb.tppe.infra.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import unb.tppe.domain.entity.BaseEntity;
 import unb.tppe.domain.entity.Department;
 import unb.tppe.domain.entity.Product;
 import unb.tppe.domain.respository.DepartmentRepository;
-import unb.tppe.domain.respository.ProductRepository;
 import unb.tppe.infra.mapping.DepartmentMapper;
 import unb.tppe.infra.schema.DepartmentSchema;
 import unb.tppe.infra.schema.ProductSchema;
@@ -35,7 +35,7 @@ public class DepartmentRepositoryImp implements DepartmentRepository, PanacheRep
             List<ProductSchema> productSchemas = productRepositorryImp.listByIdList(
                     entity.getProducts()
                             .stream()
-                            .map(p -> p.getId())
+                            .map(BaseEntity::getId)
                             .toList());
 
             schema.setProducts(productSchemas);
@@ -64,8 +64,7 @@ public class DepartmentRepositoryImp implements DepartmentRepository, PanacheRep
 
     public List<Department> listAllEntity() {
         List<DepartmentSchema> schemas = listAll();
-        List<Department> departments = schemas.stream().map(mapper::toDomain).toList();
-        return departments;
+        return schemas.stream().map(mapper::toDomain).toList();
     }
 
     @Transactional

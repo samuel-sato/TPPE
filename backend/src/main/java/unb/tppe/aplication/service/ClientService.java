@@ -12,7 +12,6 @@ import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped

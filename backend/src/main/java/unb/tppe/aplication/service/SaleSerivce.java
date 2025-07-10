@@ -16,7 +16,6 @@ import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @ApplicationScoped
 public class SaleSerivce {

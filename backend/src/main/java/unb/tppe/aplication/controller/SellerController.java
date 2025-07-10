@@ -14,7 +14,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import unb.tppe.aplication.dto.SellerDTO;
 import unb.tppe.aplication.service.SellerSerivce;
-import unb.tppe.domain.entity.Seller;
 
 @Path("/sellers")
 @Consumes(MediaType.APPLICATION_JSON)

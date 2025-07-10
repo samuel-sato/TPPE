@@ -2,7 +2,6 @@ package unb.tppe.aplication.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import unb.tppe.aplication.dto.DepartmentDTO;
-import unb.tppe.aplication.dto.ProductDTO;
 import unb.tppe.domain.entity.Department;
 import unb.tppe.domain.entity.Product;
 import unb.tppe.domain.respository.DepartmentRepository;
@@ -13,7 +12,6 @@ import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class DepartmentSerivce {

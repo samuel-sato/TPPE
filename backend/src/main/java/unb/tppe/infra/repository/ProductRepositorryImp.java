@@ -8,7 +8,6 @@ import unb.tppe.domain.respository.ProductRepository;
 import unb.tppe.infra.mapping.ProductMapper;
 import unb.tppe.infra.schema.DepartmentSchema;
 import unb.tppe.infra.schema.ProductSchema;
-import unb.tppe.infra.schema.SellerSchema;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -1,6 +1,5 @@
 package unb.tppe.domain.useCase;
 
-import unb.tppe.domain.UserRoleEnum;
 import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.respository.UserRepository;
 

@@ -13,7 +13,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import unb.tppe.aplication.dto.DepartmentDTO;
-import unb.tppe.aplication.dto.ProductDTO;
 import unb.tppe.aplication.service.DepartmentSerivce;
 import unb.tppe.domain.entity.Department;
 

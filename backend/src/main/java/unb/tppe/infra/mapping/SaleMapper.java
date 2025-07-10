@@ -3,7 +3,6 @@ package unb.tppe.infra.mapping;
 import jakarta.enterprise.context.ApplicationScoped;
 import unb.tppe.domain.entity.Sale;
 import unb.tppe.domain.mapping.Mapping;
-import unb.tppe.infra.schema.ProductSchema;
 import unb.tppe.infra.schema.SaleSchema;
 
 @ApplicationScoped
