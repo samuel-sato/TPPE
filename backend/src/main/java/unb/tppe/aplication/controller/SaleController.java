@@ -72,4 +72,14 @@ public class SaleController {
     public Response delete(Long id){
         return Response.status(Response.Status.NO_CONTENT).entity(service.deleteById(id)).build();
     }
+
+    @GET()
+    @Path("client/{id}")
+    public Response readByClientId(Long id){
+        try{
+            return Response.status(Response.Status.OK).entity(service.listByIdClient(id)).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+    }
 }

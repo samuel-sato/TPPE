@@ -82,6 +82,9 @@ public class SellerRepositorryImp implements SellerRepository, PanacheRepository
             return true;
         }
         return false;
+    }
 
+    public Seller findByIdPerson(Long idPerson) {
+        return mapper.toDomain(list("personSchema.id", idPerson).getFirst());
     }
 }

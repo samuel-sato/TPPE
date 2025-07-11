@@ -61,7 +61,6 @@ export class LoginComponent {
 
       this.loginService.login(user).subscribe({
         next: (resData) => {
-          console.log('Login bem-sucedido!', resData);
           this.isLoading = false; // Finaliza o carregamento
           this.router.navigate(['/home']); // Redireciona para a home
         },
@@ -77,8 +76,7 @@ export class LoginComponent {
   }
 
   cadastrarCliente() {
-    console.log('Redirecionar para a página de cadastro');
-    // Exemplo: this.router.navigate(['/cadastro']);
+    this.router.navigate(['/client']);
   }
 
   // Método notificarErro agora aceita uma mensagem

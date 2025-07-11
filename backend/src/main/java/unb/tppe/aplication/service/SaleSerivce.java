@@ -11,7 +11,7 @@ import unb.tppe.domain.entity.Seller;
 import unb.tppe.domain.respository.SaleRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
 import unb.tppe.domain.useCase.DeleteBaseUseCase;
-import unb.tppe.domain.useCase.ReadBaseUseCase;
+import unb.tppe.domain.useCase.SaleUseCase;
 import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 import java.util.ArrayList;
@@ -21,13 +21,13 @@ import java.util.List;
 public class SaleSerivce {
 
     private CreateBaseUseCase<Sale, SaleRepository> createUseCase;
-    private ReadBaseUseCase<Sale, SaleRepository> readUseCase;
+    private SaleUseCase readUseCase;
     private DeleteBaseUseCase<Sale, SaleRepository> deleteBseCase;
     private UpdateBaseUseCase<Sale, SaleRepository> updateBseCase;
 
 
     public SaleSerivce(CreateBaseUseCase<Sale, SaleRepository> createUseCase,
-                       ReadBaseUseCase<Sale, SaleRepository> readUseCase,
+                       SaleUseCase readUseCase,
                        DeleteBaseUseCase<Sale, SaleRepository> deleteBseCase,
                        UpdateBaseUseCase<Sale, SaleRepository> updateBseCase){
         this.createUseCase = createUseCase;
@@ -145,5 +145,9 @@ public class SaleSerivce {
 
     public boolean deleteById(Long id){
         return deleteBseCase.execute(id);
+    }
+
+    public List<Sale> listByIdClient(Long idClient){
+        return this.readUseCase.findByIdClient(idClient);
     }
 }

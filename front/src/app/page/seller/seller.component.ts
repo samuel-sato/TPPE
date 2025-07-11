@@ -77,7 +77,7 @@ export class SellerComponent implements OnInit {
             baseSalary: seller.baseSalary,
             numberHours: seller.numberHours
           });
-          console.log('Seller encontrado:', seller);
+          
           this.titulo = 'Edição de Vendedor';
         },
         error: (err) => {
@@ -101,7 +101,7 @@ export class SellerComponent implements OnInit {
           numberHours: this.sellerForm.value.numberHours
         }
         
-        console.log(seller);
+        
   
         if (this.id) {
           // Atualizar

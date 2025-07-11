@@ -12,12 +12,13 @@ import { SalesComponent } from './page/sales/sales.component';
 import { SaleComponent } from './page/sale/sale.component';
 import { HomeComponent } from './page/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
+import { SaleHistoryComponent } from './page/sale-history/sale-history.component';
 
 export const routes: Routes = [
     {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: 'clients', component: ClientsComponent, canActivate: [AuthGuard]},
-    {path: 'client', component: ClientComponent, canActivate: [AuthGuard]},
+    {path: 'client', component: ClientComponent},
     {path: 'client/:id', component: ClientComponent , canActivate: [AuthGuard]},
     {path: 'departments', component: DepartmentsComponent, canActivate: [AuthGuard]},
     {path: 'department', component: DepartmentComponent, canActivate: [AuthGuard]},
@@ -30,6 +31,9 @@ export const routes: Routes = [
     {path: 'product/:id', component: ProductComponent, canActivate: [AuthGuard]},
     {path: 'sales', component: SalesComponent, canActivate: [AuthGuard]},
     {path: 'sale', component: SaleComponent, canActivate: [AuthGuard]},
-    {path: 'sale/:id', component: SaleComponent, canActivate: [AuthGuard]}
+    {path: 'sale/:id', component: SaleComponent, canActivate: [AuthGuard]},
+    {path: 'salehistory', component: SaleHistoryComponent, canActivate: [AuthGuard]},
+    {path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '**', redirectTo: '/home' }
 ];
 

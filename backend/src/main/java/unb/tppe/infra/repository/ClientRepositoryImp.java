@@ -83,4 +83,8 @@ public class ClientRepositoryImp implements ClientRepository, PanacheRepository<
         }
         return false;
     }
+
+    public Client findByIdPerson(Long idPerson) {
+        return mapper.toDomain(list("personSchema.id", idPerson).getFirst());
+    }
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class ReadBaseUseCase<E extends BaseEntity, R extends ListBaseRepository<E>> {
 
-    private R repository;
+    protected R repository;
 
     public ReadBaseUseCase(){
 

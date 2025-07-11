@@ -26,3 +26,8 @@
 .mat-toolbar.mat-primary a {
     color: inherit; /* Garante que o link herde a cor da toolbar */
 }
+
+/* No seu src/styles.css ou src/styles.scss */
+.mat-icon {
+  color: white;
+}

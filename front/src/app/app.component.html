@@ -3,12 +3,30 @@
     <span style="color: #4CAF50;">E-</span>Loja
   </a>
 
-  <div class="centered-icons">
+  <!-- ADMIN -->
+  <div class="centered-icons" *ngIf="role === 1">
     <button mat-button routerLink="/departments" style="color: white;">Departamentos</button>
     <button mat-button routerLink="/products" style="color: white;">Produtos</button>
     <button mat-button routerLink="/sales" style="color: white;">Vendas</button>
     <button mat-button routerLink="/clients" style="color: white;">Clientes</button>
     <button mat-button routerLink="/sellers" style="color: white;">Vendedores</button>
+    <button mat-icon-button (click)="logout()"><mat-icon>logout</mat-icon></button>
+  </div>
+  
+  <!-- CLIENT -->
+  <div class="centered-icons" *ngIf="role === 2"> 
+    <button mat-button routerLink="/salehistory" style="color: white;">Histórico de Compras</button>
+    <button mat-button [routerLink]="routerPersonData" style="color: white;">Dados Pessoais</button>
+    <button mat-icon-button (click)="logout()"><mat-icon>logout</mat-icon></button>
+  </div>
+
+  <!-- SELLER -->
+  <div class="centered-icons" *ngIf="role === 3">
+    <button mat-button routerLink="/products" style="color: white;">Produtos</button>
+    <button mat-button routerLink="/sales" style="color: white;">Vendas</button>
+    <button mat-button routerLink="/clients" style="color: white;">Clientes</button>
+    <button mat-button [routerLink]="routerPersonData" style="color: white;">Dados Pessoais</button>
+    <button mat-icon-button (click)="logout()"><mat-icon>logout</mat-icon></button>
   </div>
   
 </mat-toolbar>

@@ -37,12 +37,12 @@ export class LoginService {
 
           try {
             decodedToken = jwtDecode<JwtPayload>(token);
-            console.log('Token decodificado:', decodedToken);
+            
 
             // Armazena o token e os dados decodificados no sessionStorage
             // sessionStorage só armazena strings, então convertemos o objeto JWT para string
             sessionStorage.setItem('auth_token', token);
-            sessionStorage.setItem('user_name', decodedToken.upn);    // <-- Usando 'upn'
+            sessionStorage.setItem('user_id', decodedToken.upn);    // <-- Usando 'upn'
             sessionStorage.setItem('user_profile', decodedToken.groups); // <-- Usando 'groups'
 
             // Opcional: Armazenar a data de expiração para checagem mais robusta
@@ -50,7 +50,7 @@ export class LoginService {
                 sessionStorage.setItem('token_expiration', decodedToken.exp.toString());
             }
 
-            console.log('Login bem-sucedido! Token, nome e perfil setados na sessionStorage.');
+            
 
           } catch (error) {
             console.error('Erro ao decodificar o token:', error);
@@ -74,8 +74,8 @@ export class LoginService {
    * Obtém o nome do usuário a partir do sessionStorage.
    * @returns O nome do usuário ou uma string vazia se não encontrado.
    */
-  getUserName(): string {
-    return sessionStorage.getItem('user_name') || '';
+  getUserId(): string {
+    return sessionStorage.getItem('user_id') || '';
   }
 
   /**
@@ -110,7 +110,7 @@ export class LoginService {
    */
   logout(): void {
     sessionStorage.clear(); // Limpa todos os itens do sessionStorage para esta origem
-    console.log('Dados de autenticação removidos da sessionStorage. Usuário deslogado.');
+    
     this.router.navigate(['/auth/login']); // Redireciona para a página de login
   }
 

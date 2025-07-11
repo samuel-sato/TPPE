@@ -105,7 +105,7 @@ export class SaleComponent implements OnInit{
             products: sale.products
           }
         );
-          console.log('Product encontrado:', sale);
+          
           this.titulo = 'Edição da Venda';
           this.sale = sale; 
         },
@@ -132,7 +132,6 @@ export class SaleComponent implements OnInit{
         sale.products = this.sale.products || [];
         sale.price = this.sale.products.reduce((total, produto) => total + produto.price, 0);
 
-        console.log(sale);
   
         if (this.id) {
           // Atualizar
@@ -179,7 +178,7 @@ export class SaleComponent implements OnInit{
   }
 
   deleteProductSale(id: number) {
-    console.log(id);
+    
     if (this.sale.products) {
       this.sale.products = this.sale.products.filter(product => product.id !== id);
       this.saleForm.patchValue({ products: this.sale.products });

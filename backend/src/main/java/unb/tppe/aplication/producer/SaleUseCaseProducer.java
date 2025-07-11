@@ -8,7 +8,7 @@ import unb.tppe.domain.entity.Sale;
 import unb.tppe.domain.respository.SaleRepository;
 import unb.tppe.domain.useCase.CreateBaseUseCase;
 import unb.tppe.domain.useCase.DeleteBaseUseCase;
-import unb.tppe.domain.useCase.ReadBaseUseCase;
+import unb.tppe.domain.useCase.SaleUseCase;
 import unb.tppe.domain.useCase.UpdateBaseUseCase;
 
 @ApplicationScoped
@@ -28,8 +28,8 @@ public class SaleUseCaseProducer {
 
     @RequestScoped
     @Produces
-    public ReadBaseUseCase<Sale, SaleRepository> readUseCase(){
-        return new ReadBaseUseCase<Sale, SaleRepository>(repository);
+    public SaleUseCase readUseCase(){
+        return new SaleUseCase(repository);
     }
 
     @RequestScoped

@@ -106,4 +106,9 @@ public class SaleRepositoryImp implements SaleRepository, PanacheRepository<Sale
     public boolean deleteEntity(long id) {
         return deleteById(id);
     }
+
+
+    public List<Sale> findByIdClient(Long id) {
+        return this.mapper.toDomain(list("client.id", id));
+    }
 }

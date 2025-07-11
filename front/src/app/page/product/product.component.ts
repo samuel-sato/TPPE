@@ -66,7 +66,6 @@ export class ProductComponent implements OnInit{
             department: product.department,
             idDepartment: product.idDepartment
           });
-          console.log('Product encontrado:', product);
           this.titulo = 'Edição do Produto';
         },
         error: (err) => {
@@ -89,7 +88,6 @@ export class ProductComponent implements OnInit{
         idDepartment: this.productForm.value.idDepartment
       }
       
-      console.log(product);
 
       if (this.id) {
         // Atualizar

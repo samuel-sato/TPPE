@@ -5,6 +5,8 @@ import unb.tppe.domain.entity.Sale;
 import unb.tppe.domain.mapping.Mapping;
 import unb.tppe.infra.schema.SaleSchema;
 
+import java.util.List;
+
 @ApplicationScoped
 public class SaleMapper implements Mapping<Sale, SaleSchema> {
 
@@ -28,6 +30,10 @@ public class SaleMapper implements Mapping<Sale, SaleSchema> {
                 .dateSale(schema.getDateSale())
                 .products(schema.getProducts().stream().map(p -> this.productMapper.toDomain(p)).toList())
                 .build();
+    }
+
+    public List<Sale> toDomain(List<SaleSchema> schemas) {
+        return schemas.stream().map(this::toDomain).toList();
     }
 
 
