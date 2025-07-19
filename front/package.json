@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy-ghpages": "ng build --base-href /TPPE/ --configuration=production && cp dist/front/browser/index.html && npx angular-cli-ghpages --dir=dist/front"
   },
   "private": true,
   "dependencies": {

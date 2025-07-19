@@ -6,9 +6,13 @@ como Padrões de Projeto, Arquitetura Limpa e Desenvolvimento guido por Testes.
 O projeto consiste em um sistema de gestão de vendas. 
 
 
-### UML
+### Diagrama UML
 
 ![DiagramaUML](./UML.jpeg)
+
+### Diagrama Físico
+
+![DiagramaUML](./img.png)
 
 ### Construção
 
