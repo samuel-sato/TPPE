@@ -1,4 +1,4 @@
-#Fri Jul 18 22:38:41 BRT 2025
+#Sat Jul 19 00:51:15 BRT 2025
 /home/samuel/UNB/TPPE/refactor/backend/src/main/java/unb/tppe/aplication/controller/ClientController.java=1752108766796
 /home/samuel/UNB/TPPE/refactor/backend/src/main/java/unb/tppe/aplication/controller/DepartmentController.java=1752176677121
 /home/samuel/UNB/TPPE/refactor/backend/src/main/java/unb/tppe/aplication/controller/LoginController.java=1752176658015
@@ -69,5 +69,5 @@
 /home/samuel/UNB/TPPE/refactor/backend/src/main/java/unb/tppe/infra/schema/ProductSchema.java=1751589798739
 /home/samuel/UNB/TPPE/refactor/backend/src/main/java/unb/tppe/infra/schema/SaleSchema.java=1750984789504
 /home/samuel/UNB/TPPE/refactor/backend/src/main/java/unb/tppe/infra/schema/SellerSchema.java=1750984812493
-/home/samuel/UNB/TPPE/refactor/backend/src/main/resources/application.properties=1752108796809
+/home/samuel/UNB/TPPE/refactor/backend/src/main/resources/application.properties=1752896989663
 configuration*?=FB3A4E1EE2281C7A6B15FC4D6FDDB9CD0CBEB421
