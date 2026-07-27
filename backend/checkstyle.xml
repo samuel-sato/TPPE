@@ -6,7 +6,12 @@
 <!--    <module name="JavadocPackage"/>-->
     <module name="TreeWalker">
         <module name="AvoidStarImport"/>
+        <module name="UnusedImports"/>
         <module name="ConstantName"/>
         <module name="EmptyBlock"/>
+        <module name="TypeName"/>
+        <module name="MethodName"/>
+        <module name="PackageName"/>
+        <module name="CyclomaticComplexity"/>
     </module>
 </module>
