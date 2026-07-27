@@ -4,7 +4,6 @@ import io.smallrye.jwt.build.Jwt;
 import jakarta.enterprise.context.ApplicationScoped;
 import unb.tppe.aplication.dto.TokenDTO;
 import unb.tppe.aplication.dto.UserLoginDTO;
-import unb.tppe.domain.entity.Person;
 import unb.tppe.domain.entity.User;
 import unb.tppe.domain.useCase.LoginUseCase;
 
