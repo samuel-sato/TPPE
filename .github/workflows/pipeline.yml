@@ -19,11 +19,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      - name: Set up jdk Java
+      - name: Set up JDK Java
         uses: actions/setup-java@v5
         with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
+          distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
+          cache: 'maven'
 
       - run: java --version
+
+      - name: Checkstyle
+        run: mvn checkstyle:check
         
