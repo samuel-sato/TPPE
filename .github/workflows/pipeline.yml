@@ -12,7 +12,7 @@ env:
   JAVA_VERSION: 21
 
 jobs:
-  Análise Estática:
+  Analise_Estatica:
     runs-on: ubuntu-latest
     steps:
       
