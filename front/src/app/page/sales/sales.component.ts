@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,14 +15,14 @@ import { NotificationComponent } from '../../notification/notification.component
 @Component({
   selector: 'app-sales',
   imports: [
-    MatTableModule, 
-    CommonModule,
+    MatTableModule,
     MatIconModule,
     MatCardModule,
     MatButtonModule,
     RouterLink
-  ],
+],
   templateUrl: './sales.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sales.component.css'
 })
 export class SalesComponent {

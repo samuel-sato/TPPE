@@ -1,9 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
+
 import { Product } from '../../entity/Product';
 import { ProductService } from '../../service/product.service';
 import { ProductList } from '../../entity/ProductList';
@@ -13,13 +13,13 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-product-selector-dialog',
   standalone: true,
   imports: [
-    CommonModule,
     MatDialogModule,
     MatTableModule,
     MatCheckboxModule,
     MatButtonModule,
     FormsModule
-  ],
+],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <h2 mat-dialog-title>Selecionar Produtos</h2>
     <mat-dialog-content>

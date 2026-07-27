@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,14 +15,14 @@ import { LoginService } from '../../service/login.service';
 @Component({
   selector: 'app-sale-history',
   imports: [
-    MatTableModule, 
-    CommonModule,
+    MatTableModule,
     MatIconModule,
     MatCardModule,
     MatButtonModule,
     RouterLink
-  ],
+],
   templateUrl: './sale-history.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sale-history.component.css'
 })
 export class SaleHistoryComponent implements OnInit{

@@ -1,8 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { DepartmentService } from '../../service/department.service';
 import { DepartmentList } from '../../entity/DepartmentList';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButton, MatButtonModule } from '@angular/material/button';
@@ -15,14 +15,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-departments',
   imports: [
-    MatTableModule, 
-    CommonModule,
+    MatTableModule,
     MatIconModule,
     MatCardModule,
     MatButtonModule,
     RouterLink
-  ],
+],
   templateUrl: './departments.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './departments.component.css'
 })
 export class DepartmentsComponent implements OnInit{

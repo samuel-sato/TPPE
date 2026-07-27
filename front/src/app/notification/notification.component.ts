@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { NotificationData } from './NotificationData';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-notification',
   imports: [CommonModule],
   templateUrl: './notification.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './notification.component.css'
 })
 export class NotificationComponent {

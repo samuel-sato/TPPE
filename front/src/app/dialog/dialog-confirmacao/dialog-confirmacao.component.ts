@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -9,14 +9,14 @@ import { MatTableModule } from '@angular/material/table';
 @Component({
   selector: 'app-dialog-confirmacao',
   imports: [
-    CommonModule,
     MatDialogModule,
     MatTableModule,
     MatCheckboxModule,
     MatButtonModule,
     FormsModule
-  ],
+],
   templateUrl: './dialog-confirmacao.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dialog-confirmacao.component.css'
 })
 export class DialogConfirmacaoComponent {

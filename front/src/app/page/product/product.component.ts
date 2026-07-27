@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -9,7 +9,7 @@ import { Product } from '../../entity/Product';
 import { ProductService } from '../../service/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Department } from '../../entity/Department';
-import { CommonModule } from '@angular/common';
+
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationComponent } from '../../notification/notification.component';
@@ -22,10 +22,10 @@ import { NotificationComponent } from '../../notification/notification.component
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatIconModule,
-    CommonModule
-  ],
+    MatIconModule
+],
   templateUrl: './product.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit{

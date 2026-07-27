@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -33,14 +33,14 @@ import { NotificationComponent } from '../../notification/notification.component
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
-    CommonModule,
     MatSelectModule,
     FormsModule,
     MatDatepickerModule,
     MatTableModule
-  ],
+],
   templateUrl: './sale.component.html',
   styleUrl: './sale.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [provideNativeDateAdapter()]
 })
 export class SaleComponent implements OnInit{

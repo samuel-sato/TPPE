@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,14 +15,14 @@ import { NotificationComponent } from '../../notification/notification.component
 @Component({
   selector: 'app-clients',
   imports: [
-    MatTableModule, 
-    CommonModule,
+    MatTableModule,
     MatIconModule,
     MatCardModule,
     MatButtonModule,
     RouterLink
-  ],
+],
   templateUrl: './clients.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './clients.component.css'
 })
 export class ClientsComponent implements OnInit {

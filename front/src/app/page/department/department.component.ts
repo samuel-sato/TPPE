@@ -27,6 +27,7 @@ import { NotificationComponent } from '../../notification/notification.component
     MatTableModule
   ],
   templateUrl: './department.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './department.component.css'
 })
 export class DepartmentComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -30,6 +30,7 @@ import { NotificationComponent } from '../../notification/notification.component
   ],
   templateUrl: './cliente.component.html',
   styleUrl: './cliente.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [provideNativeDateAdapter()]
 })
 export class ClientComponent implements OnInit {
