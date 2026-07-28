@@ -35,7 +35,6 @@ jobs:
         run: mvn checkstyle:check
 
   Test:
-    needs: Compile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -65,7 +64,7 @@ jobs:
       
 
   SonarQube:
-    needs: Compile
+    needs: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
