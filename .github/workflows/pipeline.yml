@@ -32,3 +32,12 @@ jobs:
         working-directory: backend
         run: mvn checkstyle:check
       
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@master
+        with:
+          projectBaseDir: backend
+          extraProperties: |
+            sonar.projectKey=TPPE
+            sonar.organization=tppe
+            sonar.host.url=https://sonarcloud.io
+            sonar.login=${{ secrets.SONAR_TOKEN }}
