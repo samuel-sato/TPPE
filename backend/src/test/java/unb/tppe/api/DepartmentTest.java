@@ -19,7 +19,7 @@ public class DepartmentTest {
     void listAll(){
         given()
                 .when()
-                .get("/departmentss")
+                .get("/departments")
                 .then()
                 .statusCode(200)
                 .body("", not(empty()));
