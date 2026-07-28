@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import unb.tppe.domain.entity.Product;
 
 import java.time.LocalDate;
 import java.util.List;
