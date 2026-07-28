@@ -34,7 +34,8 @@ jobs:
         working-directory: backend
         run: mvn checkstyle:check
 
-  Compile:
+  Test:
+    needs: Compile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -51,15 +52,17 @@ jobs:
 
       - run: java --version
 
-      - name: Compilar
+      - name: Testes
         working-directory: backend
-        run: mvn compile
+        run: mvn test
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: backend-target
           path: backend/target
+
+      
 
   SonarQube:
     needs: Compile
@@ -84,24 +87,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  Test:
-    needs: Compile
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-
-      - name: Set up JDK Java
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'temurin'
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: 'maven'
-
-      - run: java --version
-
-      - name: Testes
-        working-directory: backend
-        run: mvn test
+  
