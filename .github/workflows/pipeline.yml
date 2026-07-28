@@ -12,7 +12,7 @@ env:
   JAVA_VERSION: 21
 
 jobs:
-  Analise_Estatica:
+  Lint:
     runs-on: ubuntu-latest
     steps:
       
@@ -34,13 +34,56 @@ jobs:
         working-directory: backend
         run: mvn checkstyle:check
 
+  Compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'maven'
+
+      - run: java --version
+
       - name: Compilar
         working-directory: backend
         run: mvn compile
 
+  SonarQube:
+    needs: Compile
+    runs-on: ubuntu-latest
+    steps:
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
         with:
           projectBaseDir: backend
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  Test:
+    needs: Compile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'maven'
+
+      - run: java --version
+
+      - name: Testes
+        working-directory: backend
+        run: mvn test
