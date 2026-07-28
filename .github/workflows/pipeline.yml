@@ -18,6 +18,8 @@ jobs:
       
       - name: Checkout code
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK Java
         uses: actions/setup-java@v5
@@ -31,13 +33,14 @@ jobs:
       - name: Checkstyle
         working-directory: backend
         run: mvn checkstyle:check
-      
+
+      - name: Compilar
+        working-directory: backend
+        run: mvn compile
+
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
+        uses: SonarSource/sonarqube-scan-action@v5
         with:
           projectBaseDir: backend
-          extraProperties: |
-            sonar.projectKey=TPPE
-            sonar.organization=tppe
-            sonar.host.url=https://sonarcloud.io
-            sonar.login=${{ secrets.SONAR_TOKEN }}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
