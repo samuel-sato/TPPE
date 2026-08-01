@@ -63,10 +63,4 @@ public class ClientController {
     public Response delete(Long id){
         return Response.status(Response.Status.NO_CONTENT).entity(serivce.deleteById(id)).build();
     }
-
-    @GET
-    @Path("/test")
-    public Response test(){
-        return Response.status(Response.Status.OK).entity("Testando").build();
-    }
 }
