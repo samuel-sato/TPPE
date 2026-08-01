@@ -86,9 +86,19 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+      # Check the Quality Gate status.
+      - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        with:
+          pollingTimeoutSec: 600
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
+
   Build:
     environment: development
-
+    needs: SonarQube
     runs-on: ubuntu-latest
 
     steps:
@@ -101,19 +111,5 @@ jobs:
     - name: Echo
       run: echo "Building the project in ${{ job.environment }} environment"
   
-  Build-Production:
-    environment: production
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-    - name: Checkout code
-      uses: actions/checkout@v7
-      with:
-        fetch-depth: 0
-    
-    - name: Echo
-      run: echo "Building the project in ${{ job.environment }} environment"
 
   
