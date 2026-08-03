@@ -2,7 +2,7 @@ name : Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, developer ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -25,7 +25,7 @@ jobs:
           echo "Actor: ${{ github.actor}}"
           echo "Commit: ${{ github.sha}}"
           echo "Commit message: ${{ github.event.head_commit.message}}"
-          echo "Versão Runner: ${{ github.run_number}}"
+          echo "Runner Number: ${{ github.run_number}}"
 
   Lint:
     runs-on: ubuntu-latest
