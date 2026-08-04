@@ -80,12 +80,12 @@
 ###
 
 # Testes e build
-FROM registry.access.redhat.com/ubi9/openjdk-21:1.21 AS build
+# FROM registry.access.redhat.com/ubi9/openjdk-21:1.21 AS build
 
-WORKDIR /project
-COPY . .
+# WORKDIR /project
+# COPY . .
 
-RUN ./mvnw verify && ./mvnw package -DskipTests
+# RUN ./mvnw verify && ./mvnw package -DskipTests
 
 # Execução da aplicação
 FROM registry.access.redhat.com/ubi9/openjdk-21:1.21
