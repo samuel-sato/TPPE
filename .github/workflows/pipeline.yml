@@ -139,7 +139,7 @@ jobs:
     needs: Build
     runs-on: ubuntu-latest
     if: github.ref_name == 'developer'
-    env: development
+    environment: development
 
     steps:
       - name: Checkout code
@@ -160,7 +160,7 @@ jobs:
     needs: Build
     runs-on: ubuntu-latest
     if: github.ref_name == 'main'
-    env: production
+    environment: production
 
     steps:
       - name: Checkout code
