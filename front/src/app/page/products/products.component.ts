@@ -6,7 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { DepartmentService } from '../../service/department.service';
 import { ProductService } from '../../service/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,17 +22,17 @@ import { NotificationComponent } from '../../notification/notification.component
     RouterLink
 ],
   templateUrl: './products.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
+  private service = inject(ProductService);
+  private dialogConfirmacao = inject(MatDialog);
+
 
   private _snackBar = inject(MatSnackBar);
   products: ProductList[] = [];
-  displayedColumns: string[] = ['name', 'price', 'actions'];
-  
-  constructor(private service: ProductService, private dialogConfirmacao: MatDialog){
-  }
+  displayedColumns = ['name', 'price', 'actions'];
 
   ngOnInit(): void {
     this.service.getAll().subscribe({
@@ -43,7 +42,7 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-  deleteProduct(id: any){
+  deleteProduct(id: number){
     this.dialogConfirmacao.open(DialogConfirmacaoComponent).afterClosed().subscribe((confirmacao: boolean) => {
           if (confirmacao) {
     
@@ -60,7 +59,7 @@ export class ProductsComponent implements OnInit {
                   panelClass: ['snackbar-success'] // Opcional: para aplicar estilos CSS
                 });
               },
-              error: (err) => {
+              error: () => {
                 this._snackBar.openFromComponent(NotificationComponent, {
                   duration: 5 * 1000,
                   data: {

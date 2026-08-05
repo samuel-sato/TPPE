@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject, model, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { DepartmentService } from '../../service/department.service';
 import { ActivatedRoute } from '@angular/router';
 import { Department } from '../../entity/Department';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ProductSelectorDialogComponent } from '../../dialog/dialog-product/dialog-product.component';
 import { ProductList } from '../../entity/ProductList';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -27,16 +27,21 @@ import { NotificationComponent } from '../../notification/notification.component
     MatTableModule
   ],
   templateUrl: './department.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './department.component.css'
 })
 export class DepartmentComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private crudService = inject(DepartmentService);
+  private route = inject(ActivatedRoute);
+  private dialog = inject(MatDialog);
+
 
   private _snackBar = inject(MatSnackBar);
   id: string | null = null;
   departmentForm: FormGroup;
-  titulo: string = 'Cadastro de Departamento';
-  displayedColumns: string[] = ['name', 'price', 'actions'];
+  titulo = 'Cadastro de Departamento';
+  displayedColumns = ['name', 'price', 'actions'];
 
   department: Department = {
     name: '',
@@ -44,13 +49,7 @@ export class DepartmentComponent implements OnInit {
     products: []
   };
 
-  constructor(
-    private fb: FormBuilder, 
-    private crudService: DepartmentService,
-    private route: ActivatedRoute,
-    private dialog: MatDialog,
-    private dialogConfirmacao: MatDialog
-  ) 
+  constructor() 
   {
     this.departmentForm = this.fb.group({
       name: ['', Validators.required],

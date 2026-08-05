@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { JwtPayload } from '../entity/JwtPayload';
 import { LoginResponse } from '../entity/LoginResponse';
@@ -12,14 +12,12 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class LoginService {
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
 
   private readonly endpoint = 'login'; 
   private apiUrl = `${environment.apiUrl}/${this.endpoint}`;
-
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) { }
 
   /**
    * Realiza o login do usuário.
@@ -56,7 +54,7 @@ export class LoginService {
             console.error('Erro ao decodificar o token:', error);
             // Se o token for inválido, limpa tudo e lança um erro
             this.logout(); // Limpa dados da sessão se o token for inválido
-            throw new Error('Token de autenticação inválido ou formato inesperado.');
+            throw new Error('Token de autenticação inválido ou formato inesperado.', { cause: error });
           }
         })
       );
@@ -91,7 +89,7 @@ export class LoginService {
     }
 
     try {
-        const decodedToken: JwtPayload = jwtDecode<JwtPayload>(token);
+        jwtDecode<JwtPayload>(token); // valida o formato do token; lança se inválido
         const expTimestamp = parseInt(expiration, 10); // Converte de volta para número
 
         // Verifica se o token não expirou

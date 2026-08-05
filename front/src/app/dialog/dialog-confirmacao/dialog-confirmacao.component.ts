@@ -1,5 +1,5 @@
 
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -16,19 +16,15 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule
 ],
   templateUrl: './dialog-confirmacao.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './dialog-confirmacao.component.css'
 })
 export class DialogConfirmacaoComponent {
+    private dialogRef = inject<MatDialogRef<DialogConfirmacaoComponent>>(MatDialogRef) ?? inject(MatDialogRef<DialogConfirmacaoComponent>);
+
   
-    displayedColumns: string[] = ['select', 'name', 'price'];
-    titulo: string = "Confirmar exclusão";
-  
-  
-    constructor(
-      private dialogRef: MatDialogRef<DialogConfirmacaoComponent>
-    ) {
-    }
+    displayedColumns = ['select', 'name', 'price'];
+    titulo = "Confirmar exclusão";
   
     confirmar() {
       this.dialogRef.close(true);

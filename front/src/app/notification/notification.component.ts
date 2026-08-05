@@ -1,4 +1,4 @@
-import { Component, Inject, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { NotificationData } from './NotificationData';
 import { CommonModule } from '@angular/common';
@@ -7,20 +7,19 @@ import { CommonModule } from '@angular/common';
   selector: 'app-notification',
   imports: [CommonModule],
   templateUrl: './notification.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './notification.component.css'
 })
 export class NotificationComponent {
+  data = inject<NotificationData // Injete os dados
+>(MAT_SNACK_BAR_DATA);
 
-  // A propriedade 'message' agora é obtida dos dados injetados
-  // O @Input() pode ser removido se a única forma de passar a mensagem for via MatSnackBar.data
-  // No entanto, se você quiser que o componente de notificação também possa ser usado diretamente com [message]="...", mantenha o @Input()
   message: string;
-  type: string = 'info'; // Valor padrão para tipo
+  type = 'info'; // Valor padrão para tipo
 
-  constructor(
-    @Inject(MAT_SNACK_BAR_DATA) public data: NotificationData // Injete os dados
-  ) {
+  constructor() {
+    const data = this.data;
+
     this.message = data.message;
     if (data.type) {
       this.type = data.type;

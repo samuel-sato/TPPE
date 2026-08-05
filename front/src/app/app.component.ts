@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,25 +11,18 @@ import { LoginService } from './service/login.service';
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './app.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './app.component.css'
 })
-export class AppComponent implements AfterViewInit {
-  
+export class AppComponent implements OnInit {
+
+  private route = inject(Router);
+  private service = inject(LoginService);
+
   title = 'E-Loja';
-  role: number = -1;
-  userId: number = -1;
-
-  routerPersonData: string = '';
-
-  constructor(
-    private service: LoginService,
-    private route: Router
-  ){}
-  
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  role = -1;
+  userId = -1;
+  routerPersonData = '';
 
   ngOnInit(): void {
     this.role = Number.parseInt(this.service.getUserProfile());

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -24,20 +24,18 @@ import { RouterLink } from '@angular/router';
     RouterLink
   ],
   templateUrl: './home.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
+  private productService = inject(ProductService);
+  private departmentService = inject(DepartmentService);
+
 
   products: Product[] = []; // Armazena todos os produtos carregados
   filteredProducts: Product[] = []; // Armazena os produtos filtrados para exibição
   departments: Department[] = []; // Armazena todos os departamentos
-  selectedDepartment = new FormControl<number | null>(null); // Use number | null para o FormControl
-
-  constructor(
-    private productService: ProductService,
-    private departmentService: DepartmentService
-  ) { }
+  selectedDepartment = new FormControl<number | null>(null);
 
   ngOnInit(): void {
     // Carrega todos os produtos inicialmente
@@ -55,7 +53,7 @@ export class HomeComponent implements OnInit {
     });
 
     // Observa mudanças no seletor de departamento para filtrar
-    this.selectedDepartment.valueChanges.subscribe(departmentId => {
+    this.selectedDepartment.valueChanges.subscribe(() => {
       this.applyFilter(); // Chama o método de filtro em memória
     });
   }

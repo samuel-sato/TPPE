@@ -1,10 +1,9 @@
-import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 
-import { Product } from '../../entity/Product';
 import { ProductService } from '../../service/product.service';
 import { ProductList } from '../../entity/ProductList';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     FormsModule
 ],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <h2 mat-dialog-title>Selecionar Produtos</h2>
     <mat-dialog-content>
@@ -54,14 +53,14 @@ import { FormsModule } from '@angular/forms';
   `
 })
 export class ProductSelectorDialogComponent {
-  products: ProductList[] = [];
-  displayedColumns: string[] = ['select', 'name', 'price'];
-  selection: { [id: number]: boolean } = {};
+  private dialogRef = inject<MatDialogRef<ProductSelectorDialogComponent>>(MatDialogRef);
+  private productService = inject(ProductService);
 
-  constructor(
-    private dialogRef: MatDialogRef<ProductSelectorDialogComponent>,
-    private productService: ProductService
-  ) {
+  products: ProductList[] = [];
+  displayedColumns = ['select', 'name', 'price'];
+  selection: Record<number, boolean> = {};
+
+  constructor() {
     this.productService.getAll().subscribe({
       next: (data) => this.products = data,
       error: (err) => console.error('Erro ao carregar produtos:', err)

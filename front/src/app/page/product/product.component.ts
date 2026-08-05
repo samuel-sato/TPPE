@@ -8,9 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Product } from '../../entity/Product';
 import { ProductService } from '../../service/product.service';
 import { ActivatedRoute } from '@angular/router';
-import { Department } from '../../entity/Department';
 
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationComponent } from '../../notification/notification.component';
 
@@ -25,31 +23,28 @@ import { NotificationComponent } from '../../notification/notification.component
     MatIconModule
 ],
   templateUrl: './product.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit{
+  private fb = inject(FormBuilder);
+  private crudService = inject(ProductService);
+  private route = inject(ActivatedRoute);
 
   private _snackBar = inject(MatSnackBar);
   id: string | null = null;
   productForm: FormGroup;
-  titulo: string = 'Cadastro de Produto';
+  titulo = 'Cadastro de Produto';
 
   
 
-  constructor(
-    private fb: FormBuilder, 
-    private crudService: ProductService,
-    private route: ActivatedRoute,
-    private dialogConfirmacao: MatDialog
-  ) 
+  constructor() 
   {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
-      department: [{value: '', disabled: true}, Validators.required],
-      // idDepartment: ['', Validators.required]
+      department: [{value: '', disabled: true}, Validators.required]
     });
   }
 
@@ -78,9 +73,7 @@ export class ProductComponent implements OnInit{
   onSubmit() {
       
     if(this.productForm.valid) {
-      this.productForm.value;
-
-      var product: Product ={
+      const product: Product ={
         name: this.productForm.value.name,
         description: this.productForm.value.description,
         price: this.productForm.value.price,
@@ -93,10 +86,10 @@ export class ProductComponent implements OnInit{
         // Atualizar
         product.id = parseInt(this.id, 10);
         this.crudService.update(product).subscribe({
-          next: (response) => {
+          next: () => {
             this.notificarSucesso();
           },
-          error: (error) => {
+          error: () => {
             this.notificarErro();
           }
         });
@@ -104,10 +97,10 @@ export class ProductComponent implements OnInit{
       else {
         // Criar
         this.crudService.create(product).subscribe({
-          next: (response) => {
+          next: () => {
             this.notificarSucesso();
           },
-          error: (error) => {
+          error: () => {
             this.notificarErro();
           }
         });

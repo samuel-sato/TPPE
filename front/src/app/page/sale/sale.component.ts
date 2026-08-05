@@ -10,7 +10,6 @@ import { Seller } from '../../entity/Seller';
 import { Client } from '../../entity/Client';
 import { SaleService } from '../../service/sale.service';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../../entity/Product';
 import { SellerService } from '../../service/seller.service';
 import { ClienteService } from '../../service/cliente.service';
 import { Sale } from '../../entity/Sale';
@@ -40,19 +39,25 @@ import { NotificationComponent } from '../../notification/notification.component
 ],
   templateUrl: './sale.component.html',
   styleUrl: './sale.component.css',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideNativeDateAdapter()]
 })
 export class SaleComponent implements OnInit{
+  private fb = inject(FormBuilder);
+  private crudService = inject(SaleService);
+  private route = inject(ActivatedRoute);
+  private clientService = inject(ClienteService);
+  private sellerService = inject(SellerService);
+  private dialog = inject(MatDialog);
 
   private _snackBar = inject(MatSnackBar);
   id: string | null = null;
   saleForm: FormGroup;
-  titulo: string = 'Cadastro de Venda';
+  titulo = 'Cadastro de Venda';
   sellers: Seller[] = [];
   clients: Client[] = [];
-  displayedColumns: string[] = ['name', 'price', 'actions'];
-  valorTotal: number = 0;
+  displayedColumns = ['name', 'price', 'actions'];
+  valorTotal = 0;
 
   sale: Sale ={
     dateSale: new Date(),
@@ -62,15 +67,7 @@ export class SaleComponent implements OnInit{
     products: [] 
   }
 
-  constructor(
-    private fb: FormBuilder, 
-    private crudService: SaleService,
-    private route: ActivatedRoute,
-    private clientService: ClienteService,
-    private sellerService: SellerService,
-    private dialog: MatDialog,
-    private dialogConfirmacao: MatDialog
-  ) 
+  constructor() 
   {
     this.saleForm = this.fb.group({
       dateSale: ['', Validators.required],
@@ -119,9 +116,7 @@ export class SaleComponent implements OnInit{
   onSubmit() {
       
       if(this.saleForm.valid) {
-        this.saleForm.value;
-  
-        var sale: Sale ={
+        const sale: Sale ={
           dateSale: this.saleForm.value.dateSale,
           price: this.saleForm.value.price,
           client: this.saleForm.value.client,
@@ -137,10 +132,10 @@ export class SaleComponent implements OnInit{
           // Atualizar
           sale.id = parseInt(this.id, 10);
           this.crudService.update(sale).subscribe({
-            next: (response) => {
+            next: () => {
               this.notificarSucesso();
             },
-            error: (error) => {
+            error: () => {
               this.notificarErro();
             }
           });
@@ -148,10 +143,10 @@ export class SaleComponent implements OnInit{
         else {
           // Criar
           this.crudService.create(sale).subscribe({
-            next: (response) => {
+            next: () => {
               this.notificarSucesso();
             },
-            error: (error) => {
+            error: () => {
               this.notificarErro();
             }
           });

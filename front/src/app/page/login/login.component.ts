@@ -1,5 +1,5 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,21 +28,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule
 ],
   templateUrl: './login.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  private fb = inject(FormBuilder);
+  private loginService = inject(LoginService);
+  private router = inject(Router);
+  private dialogConfirmacao = inject(MatDialog);
+
   loginForm: FormGroup;
   hide = true;
   isLoading = false; // Adicionado estado de carregamento
   private _snackBar = inject(MatSnackBar);
 
-  constructor(
-    private fb: FormBuilder,
-    private loginService: LoginService,
-    private router: Router,
-    private dialogConfirmacao: MatDialog // Mantido, mas não usado neste método
-  ) {
+  constructor() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -60,7 +60,7 @@ export class LoginComponent {
       };
 
       this.loginService.login(user).subscribe({
-        next: (resData) => {
+        next: () => {
           this.isLoading = false; // Finaliza o carregamento
           this.router.navigate(['/home']); // Redireciona para a home
         },

@@ -65,7 +65,8 @@ jobs:
       uses: actions/setup-node@v7
       with:
         node-version: ${{ env.NODE_VERSION }}
-        cache-dependency-paths: front/package-lock.json
+        cache: 'npm'
+        cache-dependency-path: front/package-lock.json
 
     - name: Install dependencies
       working-directory: front
@@ -103,10 +104,30 @@ jobs:
           name: backend-target
           path: backend/target
 
-      
+  TestFrontend:
+    needs: LintFrontend
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v7
+
+    - name: Set up Node
+      uses: actions/setup-node@v7
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: front/package-lock.json
+
+    - name: Install dependencies
+      working-directory: front
+      run: npm ci
+
+    - name: Run tests
+      working-directory: front
+      run: npm test
 
   SonarQube:
-    needs: [LintBackend, LintFrontend, TestBackend]
+    needs: [LintBackend, LintFrontend, TestBackend, TestFrontend]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -138,7 +159,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}     
 
-  Build:
+  BuildBackend:
     needs: SonarQube
     runs-on: ubuntu-latest
 
@@ -177,7 +198,7 @@ jobs:
 
   BuildImage:
     if: github.ref_name == 'main'
-    needs: Build
+    needs: BuildBackend
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -230,7 +251,7 @@ jobs:
 
 
   DeployDev:
-    needs: Build
+    needs: BuildBackend
     concurrency:
       group: deploy-dev
       cancel-in-progress: true

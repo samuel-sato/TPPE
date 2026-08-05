@@ -9,10 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Client } from '../../entity/Client';
-import { CrudBaseService } from '../../service/base/crud-base.service';
 import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from '../../service/cliente.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationComponent } from '../../notification/notification.component';
 
@@ -30,23 +28,22 @@ import { NotificationComponent } from '../../notification/notification.component
   ],
   templateUrl: './cliente.component.html',
   styleUrl: './cliente.component.css',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideNativeDateAdapter()]
 })
 export class ClientComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private crudService = inject(ClienteService);
+  private route = inject(ActivatedRoute);
+
 
   private _snackBar = inject(MatSnackBar);
   clientForm: FormGroup;
   hide = true;
-  exampleHeader: any;
   id: string | null = null;
-  titulo: string = 'Cadastro de Cliente';
+  titulo = 'Cadastro de Cliente';
   
-  constructor(
-    private fb: FormBuilder, 
-    private crudService: ClienteService,
-    private route: ActivatedRoute,
-    private dialogConfirmacao: MatDialog) {
+  constructor() {
     this.clientForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -84,7 +81,7 @@ export class ClientComponent implements OnInit {
     if (this.clientForm.valid) {
       const { email, password, name, dataNascimento, notificarPromocoes } = this.clientForm.value;
 
-      var cliente: Client ={
+      const cliente: Client ={
         name: name,
         email: email,
         password: password,
@@ -97,10 +94,10 @@ export class ClientComponent implements OnInit {
         // Atualizar
         cliente.id = parseInt(this.id, 10);
         this.crudService.update(cliente).subscribe({
-          next: (response) => {
+          next: () => {
             this.notificarSucesso();
           },
-          error: (error) => {
+          error: () => {
             this.notificarErro();
           }
         });
@@ -108,10 +105,10 @@ export class ClientComponent implements OnInit {
       else {
         // Criar
         this.crudService.create(cliente).subscribe({
-          next: (response) => {
+          next: () => {
             this.notificarSucesso();
           },
-          error: (error) => {
+          error: () => {
             this.notificarErro();
           }
         });

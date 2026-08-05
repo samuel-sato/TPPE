@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { Observable, throwError, catchError } from 'rxjs';
 import { environment } from '../../../environments/environments';
 import { BaseEntity } from '../../entity/BaseEntity';
@@ -9,18 +9,15 @@ import { BaseEntity } from '../../entity/BaseEntity';
 })
 export abstract class CrudBaseService<E extends BaseEntity> {
 
-  protected url: string;
-  protected headers: HttpHeaders;
-  
-  constructor(
-    protected http: HttpClient,
-    protected endpoint: string 
-  ) { 
-    this.url = `${environment.apiUrl}/${this.endpoint}`;
-    this.headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  protected abstract endpoint: string;
+  protected http = inject(HttpClient);
+  protected headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  protected get url(): string {
+    return `${environment.apiUrl}/${this.endpoint}`;
   }
 
-  protected handleError(error: any): Observable<never> {
+  protected handleError(error: HttpErrorResponse): Observable<never> {
     // console.error(`Erro na requisição para ${this.url}:`, error);
     let errorMessage = 'Ocorreu um erro desconhecido.';
     

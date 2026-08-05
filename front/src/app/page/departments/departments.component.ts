@@ -5,7 +5,7 @@ import { DepartmentList } from '../../entity/DepartmentList';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { NotificationComponent } from '../../notification/notification.component';
 import { DialogConfirmacaoComponent } from '../../dialog/dialog-confirmacao/dialog-confirmacao.component';
@@ -22,17 +22,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     RouterLink
 ],
   templateUrl: './departments.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './departments.component.css'
 })
 export class DepartmentsComponent implements OnInit{
+  private service = inject(DepartmentService);
+  private dialogConfirmacao = inject(MatDialog);
+
 
   private _snackBar = inject(MatSnackBar);
   departments: DepartmentList[] = [];
   displayedColumns: string[] = ['name', 'description', 'actions'];
-
-  constructor(private service: DepartmentService, private dialogConfirmacao: MatDialog){
-  }
 
   ngOnInit(): void {
     this.service.getAll().subscribe({
@@ -42,7 +42,7 @@ export class DepartmentsComponent implements OnInit{
     })
   }
 
-  deleteDepartment(id: any){
+  deleteDepartment(id: number){
     this.dialogConfirmacao.open(DialogConfirmacaoComponent).afterClosed().subscribe((confirmacao: boolean) => {
           if (confirmacao) {
     
@@ -59,7 +59,7 @@ export class DepartmentsComponent implements OnInit{
                   panelClass: ['snackbar-success'] // Opcional: para aplicar estilos CSS
                 });
               },
-              error: (err) => {
+              error: () => {
                 this._snackBar.openFromComponent(NotificationComponent, {
                   duration: 5 * 1000,
                   data: {

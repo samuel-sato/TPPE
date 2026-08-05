@@ -22,18 +22,18 @@ import { NotificationComponent } from '../../notification/notification.component
     RouterLink
 ],
   templateUrl: './clients.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './clients.component.css'
 })
 export class ClientsComponent implements OnInit {
+  private service = inject(ClienteService);
+  private dialogConfirmacao = inject(MatDialog);
+
 
   private _snackBar = inject(MatSnackBar);
 
   clients: ClientList[] = [];
-  displayedColumns: string[] = ['name', 'actions'];
-  
-    constructor(private service: ClienteService, private dialogConfirmacao: MatDialog){
-    }
+  displayedColumns = ['name', 'actions'];
   
     ngOnInit(): void {
       this.service.getAll().subscribe({
@@ -43,7 +43,7 @@ export class ClientsComponent implements OnInit {
       })
     }
   
-    deleteClient(id: any){
+    deleteClient(id: number){
       this.dialogConfirmacao.open(DialogConfirmacaoComponent).afterClosed().subscribe((confirmacao: boolean) => {
             if (confirmacao) {
       
@@ -60,7 +60,7 @@ export class ClientsComponent implements OnInit {
                     panelClass: ['snackbar-success'] // Opcional: para aplicar estilos CSS
                   });
                 },
-                error: (err) => {
+                error: () => {
                   this._snackBar.openFromComponent(NotificationComponent, {
                     duration: 5 * 1000,
                     data: {

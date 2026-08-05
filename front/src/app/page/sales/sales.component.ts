@@ -1,5 +1,5 @@
 
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,18 +22,17 @@ import { NotificationComponent } from '../../notification/notification.component
     RouterLink
 ],
   templateUrl: './sales.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './sales.component.css'
 })
-export class SalesComponent {
+export class SalesComponent implements OnInit {
+  private service = inject(SaleService);
+  private dialogConfirmacao = inject(MatDialog);
+
 
   private _snackBar = inject(MatSnackBar);
   sales: Sale[] = [];
   displayedColumns: string[] = ['dateSale', 'client', 'seller', 'price', 'actions'];
-    
-  constructor(private service: SaleService, private dialogConfirmacao: MatDialog) {
-    
-  }
 
   ngOnInit(): void {
     this.service.getAll().subscribe({
@@ -43,7 +42,7 @@ export class SalesComponent {
     })
   }
 
-  deleteSale(id: any){
+  deleteSale(id: number){
     
     this.dialogConfirmacao.open(DialogConfirmacaoComponent).afterClosed().subscribe((confirmacao: boolean) => {
       if (confirmacao) {
@@ -61,7 +60,7 @@ export class SalesComponent {
               panelClass: ['snackbar-success'] // Opcional: para aplicar estilos CSS
             });
           },
-          error: (err) => {
+          error: () => {
             this._snackBar.openFromComponent(NotificationComponent, {
               duration: 5 * 1000,
               data: {

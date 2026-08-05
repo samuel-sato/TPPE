@@ -27,15 +27,20 @@ import { NotificationComponent } from '../../notification/notification.component
   ],
   templateUrl: './seller.component.html',
   styleUrl: './seller.component.css',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideNativeDateAdapter()]
 })
 export class SellerComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private crudService = inject(SellerService);
+  private route = inject(ActivatedRoute);
+  private dialogConfirmacao = inject(MatDialog);
+
 
   private _snackBar = inject(MatSnackBar);
   id: string | null = null;
   sellerForm: FormGroup;
-  titulo: string = 'Cadastro de Vendedor';
+  titulo = 'Cadastro de Vendedor';
   hide = true;
 
   private seller: Seller = {
@@ -47,12 +52,7 @@ export class SellerComponent implements OnInit {
     numberHours: 0
   };
 
-  constructor(
-    private fb: FormBuilder, 
-    private crudService: SellerService,
-    private route: ActivatedRoute,
-    private dialogConfirmacao: MatDialog
-  ) 
+  constructor() 
   {
     this.sellerForm = this.fb.group({
       name: ['', Validators.required],
@@ -91,9 +91,7 @@ export class SellerComponent implements OnInit {
   onSubmit() {
       
       if(this.sellerForm.valid) {
-        this.sellerForm.value;
-  
-        var seller: Seller ={
+        const seller: Seller ={
           name: this.sellerForm.value.name,
           email: this.sellerForm.value.email,
           password: this.sellerForm.value.password,
@@ -108,10 +106,10 @@ export class SellerComponent implements OnInit {
           // Atualizar
           seller.id = parseInt(this.id, 10);
           this.crudService.update(seller).subscribe({
-            next: (response) => {
+            next: () => {
               this.notificarSucesso();
             },
-            error: (error) => {
+            error: () => {
               this.notificarErro();
             }
           });
@@ -119,10 +117,10 @@ export class SellerComponent implements OnInit {
         else {
           // Criar
           this.crudService.create(seller).subscribe({
-            next: (response) => {
+            next: () => {
               this.notificarSucesso();
             },
-            error: (error) => {
+            error: () => {
               this.notificarErro();
             }
           });
