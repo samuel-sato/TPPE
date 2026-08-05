@@ -65,11 +65,11 @@ jobs:
       uses: actions/setup-node@v7
       with:
         node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
+        cache-dependency-paths: front/package-lock.json
 
-    - run node --version
-
-    - npm install -g @angular/cli
+    - name: Install dependencies
+      working-directory: front
+      run: npm ci
 
     - name: Lint Angular
       working-directory: front
