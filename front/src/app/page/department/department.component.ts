@@ -98,10 +98,10 @@ export class DepartmentComponent implements OnInit {
         this.department.id = parseInt(this.id, 10); 
         // Atualizar
         this.crudService.update(this.department).subscribe({
-          next: (response) => {
+          next: () => {
             this.notificarSucesso();
           },
-          error: (error) => {
+          error: () => {
             this.notificarErro();
           }
         });
@@ -109,10 +109,10 @@ export class DepartmentComponent implements OnInit {
       else {
         // Criar
         this.crudService.create(this.department).subscribe({
-          next: (response) => {
+          next: () => {
             this.notificarSucesso();
           },
-          error: (error) => {
+          error: () => {
             this.notificarErro();
           }
         });
