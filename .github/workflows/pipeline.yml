@@ -233,7 +233,7 @@ jobs:
   
 
   Deploy-Prod:
-    needs: Build
+    needs: Build-Image
     concurrency:
       group: deploy-prod
       cancel-in-progress: true
