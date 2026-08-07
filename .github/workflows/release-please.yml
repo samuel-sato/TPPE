@@ -1,0 +1,27 @@
+name: Release Please
+
+# Roda a cada push na main: analisa os commits (Conventional Commits) desde a
+# última release de cada pacote e mantém um PR "release backend x.y.z" e/ou
+# "release front x.y.z" sempre atualizado com changelog e bump de versão.
+#
+# Quando esse PR é mergeado, o release-please cria a tag (backend-vX.Y.Z /
+# front-vX.Y.Z) e a GitHub Release correspondente. Essas tags disparam o
+# job BuildImage em backend.yml / frontend.yml, que builda e publica a
+# imagem Docker já versionada (ver "Set image name" nesses workflows).
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release Please
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
